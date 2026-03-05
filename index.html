@@ -3,17 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeof Sison | IT Support & Developer</title>
+  <title>Jeof Sison · IT Support & Developer</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- Cursor -->
   <div class="cursor"></div>
-  <div class="cursor-ring"></div>
+  <div class="cursor-trail"></div>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Aurora background -->
+  <div class="aurora">
+    <div class="aurora-blob aurora-1"></div>
+    <div class="aurora-blob aurora-2"></div>
+    <div class="aurora-blob aurora-3"></div>
+    <div class="aurora-blob aurora-4"></div>
+  </div>
 
   <!-- Navigation -->
-  <nav>
-    <div class="nav-logo">JS<span>.</span></div>
+  <nav id="navbar">
+    <div class="nav-logo">Jeof<span class="dot">.</span></div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -24,215 +36,226 @@
     </ul>
   </nav>
 
-  <!-- Hero -->
+  <!-- ══ HERO ══════════════════════════════════ -->
   <section id="hero">
-    <div class="hero-bg">
-      <div class="hero-grid"></div>
-      <div class="hero-orb hero-orb-1"></div>
-      <div class="hero-orb hero-orb-2"></div>
-    </div>
+    <div class="hero-grid-overlay"></div>
+
     <div class="hero-content">
-      <div class="hero-label">Mandaluyong City, Philippines &nbsp;·&nbsp; Open to opportunities</div>
-      <h1 class="hero-name">
-        Jeof<br>
-        <span class="accent-word" data-text="Sison">Sison</span>
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span class="badge-text">Open to opportunities</span>
+      </div>
+
+      <h1 class="hero-heading">
+        <span class="line"><span class="word">Jeof</span></span>
+        <span class="line">
+          <span class="word outline-text" data-text="Sison">
+            Sison<span class="fill">Sison</span>
+          </span>
+        </span>
       </h1>
-      <p class="hero-role">
-        <strong>IT Support</strong> &nbsp;·&nbsp;
-        <strong>Service Desk</strong> &nbsp;·&nbsp;
-        <strong>Web Dev</strong> &nbsp;·&nbsp;
-        <strong>Game Dev</strong>
+
+      <p class="hero-desc">
+        <strong>IT Support · Service Desk · Web Dev · Game Dev</strong><br>
+        BS IT Graduate crafting reliable systems by day, building games and web apps by night.
       </p>
-      <div class="hero-ctas">
-        <a href="#contact" class="btn-primary">Get In Touch</a>
-        <a href="https://github.com/R41CY" target="_blank" class="btn-secondary">GitHub — R41CY</a>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn-glow"><span>Get In Touch</span></a>
+        <a href="https://github.com/R41CY" target="_blank" class="btn-outline-glow">GitHub — R41CY ↗</a>
       </div>
     </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      <span class="scroll-text">Scroll</span>
+
+    <!-- Floating code tags -->
+    <div class="hero-tags">
+      <div class="htag"><span class="tag-purple">const</span> role = <span class="tag-accent">"IT Support"</span></div>
+      <div class="htag"><span class="tag-cyan">tools</span>.<span class="tag-accent">push</span>("ServiceNow")</div>
+      <div class="htag"><span class="tag-pink">new</span> <span class="tag-purple">Unity</span>.Game()</div>
+      <div class="htag"><span class="tag-accent">PHP</span> + SQL + <span class="tag-cyan">WebSockets</span></div>
+      <div class="htag">graduate <span class="tag-purple">2025</span> ✓</div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <span class="scroll-label">Scroll</span>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- ══ ABOUT ══════════════════════════════════ -->
   <section id="about">
-    <div class="section-header reveal">
-      <span class="section-num">01</span>
-      <h2 class="section-title">About Me</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="about-grid">
-      <div class="about-text reveal reveal-delay-1">
-        <p>
-          I'm a <strong>BS Information Technology graduate</strong> from STI College Sta. Mesa (2021–2025) with hands-on experience in Service Desk and technical support environments.
-        </p>
-        <p>
-          I specialize in <strong>remote troubleshooting, incident documentation, and user assistance</strong> via SCCM Remote Control, Quick Assist, Microsoft Remote Help, and Microsoft Teams — skilled in verifying order and billing information and escalating incidents when beyond L1 scope.
-        </p>
-        <p>
-          Outside of support, I co-developed an <strong>internal web ticketing system</strong> during my internship and built a <strong>capstone game</strong> — reflecting a genuine curiosity for both operational and creative sides of technology.
-        </p>
+    <p class="sec-label reveal">Introduction</p>
+    <h2 class="sec-title reveal rd1">Who I <span class="grad">Am</span></h2>
+
+    <div class="about-wrap">
+      <div class="about-text reveal rd1">
+        <p>I'm a <strong>BS Information Technology graduate</strong> with hands-on experience in Service Desk and technical support environments. I help users resolve issues through <em>remote troubleshooting</em>, incident documentation, and structured ticket management.</p>
+        <p>I'm skilled in <strong>SCCM Remote Control, Quick Assist, Microsoft Remote Help</strong>, and Microsoft Teams — and experienced verifying order and billing information with tools like Kenan, CSP, Clarity, and Siebel.</p>
+        <p>Beyond support, I co-developed an <strong>internal web ticketing system</strong> during my internship and served as <strong>Lead Game Developer</strong> on my capstone project — reflecting a genuine curiosity for both the operational and creative sides of technology.</p>
       </div>
-      <div class="about-stats">
-        <div class="stat-card reveal reveal-delay-1">
-          <div class="stat-num" data-target="486" data-suffix="h">0h</div>
-          <div class="stat-label">Internship Hours</div>
+
+      <div class="stat-grid reveal rd2">
+        <div class="stat-box">
+          <div class="stat-val" data-target="486" data-suffix="h">0h</div>
+          <div class="stat-lbl">Internship Hours</div>
         </div>
-        <div class="stat-card reveal reveal-delay-2">
-          <div class="stat-num" data-target="3" data-suffix="">0</div>
-          <div class="stat-label">Roles Held</div>
+        <div class="stat-box">
+          <div class="stat-val" data-target="3" data-suffix="">0</div>
+          <div class="stat-lbl">Roles Held</div>
         </div>
-        <div class="stat-card reveal reveal-delay-3">
-          <div class="stat-num" data-target="3" data-suffix="">0</div>
-          <div class="stat-label">Certifications</div>
+        <div class="stat-box">
+          <div class="stat-val" data-target="3" data-suffix="">0</div>
+          <div class="stat-lbl">Certifications</div>
         </div>
-        <div class="stat-card reveal reveal-delay-4">
-          <div class="stat-num" data-target="2" data-suffix="">0</div>
-          <div class="stat-label">Projects Shipped</div>
+        <div class="stat-box">
+          <div class="stat-val" data-target="2" data-suffix="">0</div>
+          <div class="stat-lbl">Projects Shipped</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills -->
+  <!-- ══ SKILLS ═════════════════════════════════ -->
   <section id="skills">
-    <div class="section-header reveal">
-      <span class="section-num">02</span>
-      <h2 class="section-title">Technical Skills</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="skills-grid">
+    <p class="sec-label reveal">Capabilities</p>
+    <h2 class="sec-title reveal rd1">Technical <span class="grad">Skills</span></h2>
 
-      <div class="skill-group reveal reveal-delay-1">
-        <div class="skill-group-title">IT Support</div>
-        <div class="skill-tags">
-          <span class="skill-tag">PC Troubleshooting</span>
-          <span class="skill-tag">OS Install & Config</span>
-          <span class="skill-tag">Laptop Deployment</span>
-          <span class="skill-tag">SSD Upgrades</span>
-          <span class="skill-tag">Printer Troubleshooting</span>
-          <span class="skill-tag">Password Reset & Unlock</span>
-          <span class="skill-tag">Network Diagnostics</span>
+    <div class="skills-wrap">
+      <div class="skill-card reveal rd1">
+        <span class="skill-card-icon">🖥️</span>
+        <div class="skill-card-title">IT Support</div>
+        <div class="tag-cloud">
+          <span class="tag">PC Troubleshooting</span>
+          <span class="tag">OS Install & Config</span>
+          <span class="tag">Laptop Deployment</span>
+          <span class="tag">SSD Upgrades</span>
+          <span class="tag">Printer Troubleshooting</span>
+          <span class="tag">Password Reset & Unlock</span>
+          <span class="tag">Network Diagnostics</span>
         </div>
       </div>
 
-      <div class="skill-group reveal reveal-delay-2">
-        <div class="skill-group-title">Tools & Platforms</div>
-        <div class="skill-tags">
-          <span class="skill-tag">ServiceNow</span>
-          <span class="skill-tag">SCCM Remote Control</span>
-          <span class="skill-tag">Microsoft Teams</span>
-          <span class="skill-tag">Quick Assist</span>
-          <span class="skill-tag">Microsoft Remote Help</span>
-          <span class="skill-tag">Kenan</span>
-          <span class="skill-tag">CSP</span>
-          <span class="skill-tag">Clarity</span>
-          <span class="skill-tag">Siebel</span>
+      <div class="skill-card reveal rd2">
+        <span class="skill-card-icon">🛠️</span>
+        <div class="skill-card-title">Tools & Platforms</div>
+        <div class="tag-cloud">
+          <span class="tag">ServiceNow</span>
+          <span class="tag">SCCM Remote Control</span>
+          <span class="tag">Microsoft Teams</span>
+          <span class="tag">Quick Assist</span>
+          <span class="tag">Microsoft Remote Help</span>
+          <span class="tag">Kenan</span>
+          <span class="tag">CSP</span>
+          <span class="tag">Clarity</span>
+          <span class="tag">Siebel</span>
         </div>
       </div>
 
-      <div class="skill-group reveal reveal-delay-3">
-        <div class="skill-group-title">Development</div>
-        <div class="skill-tags">
-          <span class="skill-tag">PHP</span>
-          <span class="skill-tag">JavaScript</span>
-          <span class="skill-tag">HTML</span>
-          <span class="skill-tag">CSS</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">C#</span>
-          <span class="skill-tag">SQL</span>
-          <span class="skill-tag">Node.js</span>
-          <span class="skill-tag">WebSockets</span>
-          <span class="skill-tag">Unity</span>
-          <span class="skill-tag">Cypress</span>
+      <div class="skill-card reveal rd3">
+        <span class="skill-card-icon">⚙️</span>
+        <div class="skill-card-title">Development</div>
+        <div class="tag-cloud">
+          <span class="tag">PHP</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Python</span>
+          <span class="tag">C#</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">WebSockets</span>
+          <span class="tag">Unity</span>
+          <span class="tag">Cypress</span>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- Experience -->
+  <!-- ══ EXPERIENCE ═════════════════════════════ -->
   <section id="experience">
-    <div class="section-header reveal">
-      <span class="section-num">03</span>
-      <h2 class="section-title">Experience</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="exp-list">
+    <p class="sec-label reveal">Career</p>
+    <h2 class="sec-title reveal rd1">Work <span class="grad">Experience</span></h2>
 
-      <div class="exp-card reveal reveal-delay-1">
-        <div class="exp-header">
-          <div class="exp-title-group">
-            <div class="exp-role">Service Desk Support L1</div>
-            <div class="exp-meta">
-              <span class="exp-company">Unison Solutions Delivery, Inc. &nbsp;·&nbsp; Client: AMDOCS / PLDT</span>
-              <span class="exp-date">July 8, 2025 — March 3, 2026</span>
+    <div class="timeline">
+
+      <!-- Role 1 -->
+      <div class="tl-item reveal rd1">
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Service Desk Support L1</div>
+              <div class="exp-company">Unison Solutions Delivery, Inc. · Client: AMDOCS / PLDT</div>
+              <div class="exp-date">July 8, 2025 — March 3, 2026</div>
+            </div>
+            <div class="exp-toggle">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
             </div>
           </div>
-          <div class="exp-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-          </div>
-        </div>
-        <div class="exp-body">
-          <div class="exp-body-inner">
-            <ul>
-              <li>Provided remote assistance for software installation, troubleshooting, password resets, and account unlocks.</li>
-              <li>Remotely accessed devices using SCCM Remote Control, Quick Assist, Remote Help, and Microsoft Teams.</li>
-              <li>Documented troubleshooting steps and updates using ServiceNow ticketing system.</li>
-              <li>Performed initial troubleshooting and escalated incidents beyond L1 scope.</li>
-              <li>Verified order numbers and billing accounts before endorsing to proper support teams.</li>
-              <li>Used Kenan, CSP, Clarity, and Siebel to validate order status and billing accounts.</li>
-            </ul>
+          <div class="exp-body">
+            <div class="exp-inner">
+              <ul>
+                <li>Provided remote assistance for software installation, troubleshooting, password resets, and account unlocks.</li>
+                <li>Remotely accessed devices using SCCM Remote Control, Quick Assist, Remote Help, and Microsoft Teams.</li>
+                <li>Documented troubleshooting steps and updates via ServiceNow ticketing system.</li>
+                <li>Performed initial troubleshooting and escalated incidents beyond L1 scope.</li>
+                <li>Verified order numbers and billing accounts before endorsing to proper support teams.</li>
+                <li>Used Kenan, CSP, Clarity, and Siebel to validate order status and billing accounts.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="exp-card reveal reveal-delay-2">
-        <div class="exp-header">
-          <div class="exp-title-group">
-            <div class="exp-role">Technical Support</div>
-            <div class="exp-meta">
-              <span class="exp-company">Unison Solutions Delivery, Inc.</span>
-              <span class="exp-date">June 23, 2025 — July 8, 2025</span>
+      <!-- Role 2 -->
+      <div class="tl-item reveal rd2">
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Technical Support</div>
+              <div class="exp-company">Unison Solutions Delivery, Inc.</div>
+              <div class="exp-date">June 23, 2025 — July 8, 2025</div>
+            </div>
+            <div class="exp-toggle">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
             </div>
           </div>
-          <div class="exp-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-          </div>
-        </div>
-        <div class="exp-body">
-          <div class="exp-body-inner">
-            <ul>
-              <li>Performed laptop preparation including SSD upgrades and hardware refurbishment.</li>
-              <li>Reinforced laptop bezels and assisted in device assembly.</li>
-              <li>Worked in production workflow preparing devices for deployment.</li>
-            </ul>
+          <div class="exp-body">
+            <div class="exp-inner">
+              <ul>
+                <li>Performed laptop preparation including SSD upgrades and hardware refurbishment.</li>
+                <li>Reinforced laptop bezels and assisted in device assembly.</li>
+                <li>Worked in production workflow preparing devices for deployment.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="exp-card reveal reveal-delay-3">
-        <div class="exp-header">
-          <div class="exp-title-group">
-            <div class="exp-role">IT Intern</div>
-            <div class="exp-meta">
-              <span class="exp-company">Philippines First Insurance Company, Inc.</span>
-              <span class="exp-date">486 Hours</span>
+      <!-- Role 3 -->
+      <div class="tl-item reveal rd3">
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">IT Intern</div>
+              <div class="exp-company">Philippines First Insurance Company, Inc.</div>
+              <div class="exp-date">486 Hours Internship</div>
+            </div>
+            <div class="exp-toggle">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
             </div>
           </div>
-          <div class="exp-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-          </div>
-        </div>
-        <div class="exp-body">
-          <div class="exp-body-inner">
-            <ul>
-              <li>Co-developed a web-based internal ticketing system using PHP and SQL for managing service requests.</li>
-              <li>Contributed to backend logic and database queries for ticket workflows.</li>
-              <li>Provided printer troubleshooting and PC diagnostics.</li>
-              <li>Deployed laptops including OS installation and software setup.</li>
-              <li>Mapped NAS folders and configured network scanning.</li>
-            </ul>
+          <div class="exp-body">
+            <div class="exp-inner">
+              <ul>
+                <li>Co-developed a web-based internal ticketing system using PHP and SQL for managing service requests.</li>
+                <li>Contributed to backend logic and database queries for ticket workflows.</li>
+                <li>Provided printer troubleshooting and PC diagnostics.</li>
+                <li>Deployed laptops including OS installation and software setup.</li>
+                <li>Mapped NAS folders and configured network scanning.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -240,122 +263,130 @@
     </div>
   </section>
 
-  <!-- Projects -->
+  <!-- ══ PROJECTS ════════════════════════════════ -->
   <section id="projects">
-    <div class="section-header reveal">
-      <span class="section-num">04</span>
-      <h2 class="section-title">Projects</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="projects-grid">
+    <p class="sec-label reveal">Work</p>
+    <h2 class="sec-title reveal rd1">Featured <span class="grad">Projects</span></h2>
 
-      <div class="project-card reveal reveal-delay-1">
-        <div class="project-icon">🎫</div>
-        <div class="project-name">Internal Ticketing System</div>
-        <p class="project-desc">A web-based service request platform built for office environments. Supports ticket creation, admin dashboards, approval workflows, real-time updates, and automated testing.</p>
-        <div class="project-features">
-          <span class="feature-item">Ticket creation & management</span>
-          <span class="feature-item">Admin dashboard</span>
-          <span class="feature-item">Approval & validation workflow</span>
-          <span class="feature-item">Real-time via WebSockets</span>
-          <span class="feature-item">Automated testing (Cypress)</span>
+    <div class="proj-grid">
+
+      <div class="proj-card reveal rd1">
+        <div class="proj-card-glow proj-card-glow-1"></div>
+        <div class="proj-icon">🎫</div>
+        <div class="proj-name">Internal Ticketing System</div>
+        <p class="proj-desc">A web-based service request platform built for office environments. Manages tickets end-to-end with real-time updates and automated testing.</p>
+        <div class="proj-features">
+          <span class="pfeat">Ticket creation & management</span>
+          <span class="pfeat">Admin dashboard</span>
+          <span class="pfeat">Approval & validation workflow</span>
+          <span class="pfeat">Real-time WebSocket updates</span>
+          <span class="pfeat">Automated testing (Cypress)</span>
         </div>
-        <div class="project-tech">
-          <span class="tech-tag">PHP</span>
-          <span class="tech-tag">SQL Server</span>
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">WebSockets</span>
-          <span class="tech-tag">Cypress</span>
+        <div class="proj-stack">
+          <span class="stag">PHP</span>
+          <span class="stag">SQL Server</span>
+          <span class="stag">Node.js</span>
+          <span class="stag">WebSockets</span>
+          <span class="stag">Cypress</span>
         </div>
-        <a href="https://github.com/R41CY" target="_blank" class="project-link">View on GitHub →</a>
+        <a href="https://github.com/R41CY" target="_blank" class="proj-link">View on GitHub →</a>
       </div>
 
-      <div class="project-card reveal reveal-delay-2">
-        <div class="project-icon">🧠</div>
-        <div class="project-name">Neural Labyrinth</div>
-        <p class="project-desc">A capstone game designed to teach programming concepts interactively through puzzle-based levels. Led the full game development — mechanics, gameplay logic, and interactive learning features.</p>
-        <div class="project-features">
-          <span class="feature-item">Lead Game Developer</span>
-          <span class="feature-item">Custom game mechanics</span>
-          <span class="feature-item">Interactive learning features</span>
-          <span class="feature-item">Gameplay logic implementation</span>
+      <div class="proj-card reveal rd2">
+        <div class="proj-card-glow proj-card-glow-2"></div>
+        <div class="proj-icon">🧠</div>
+        <div class="proj-name">Neural Labyrinth</div>
+        <p class="proj-desc">Capstone game designed to teach programming concepts interactively through puzzle-based levels. Served as Lead Game Developer.</p>
+        <div class="proj-features">
+          <span class="pfeat">Lead Game Developer</span>
+          <span class="pfeat">Custom game mechanics</span>
+          <span class="pfeat">Interactive learning features</span>
+          <span class="pfeat">Gameplay logic implementation</span>
         </div>
-        <div class="project-tech">
-          <span class="tech-tag">Unity</span>
-          <span class="tech-tag">C#</span>
+        <div class="proj-stack">
+          <span class="stag">Unity</span>
+          <span class="stag">C#</span>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Education -->
+  <!-- ══ EDUCATION ══════════════════════════════ -->
   <section id="education">
-    <div class="section-header reveal">
-      <span class="section-num">05</span>
-      <h2 class="section-title">Education</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="edu-card reveal reveal-delay-1">
-      <div class="edu-icon">🎓</div>
-      <div class="edu-body">
-        <div class="edu-degree">Bachelor of Science in Information Technology</div>
-        <div class="edu-school">STI College Sta. Mesa</div>
-        <div class="edu-year">2021 – 2025</div>
+    <p class="sec-label reveal">Background</p>
+    <h2 class="sec-title reveal rd1">Education & <span class="grad">Certifications</span></h2>
+
+    <div class="edu-cert-wrap">
+      <div class="edu-box reveal rd1">
+        <div class="edu-icon-wrap">🎓</div>
+        <div>
+          <div class="edu-deg">Bachelor of Science in Information Technology</div>
+          <div class="edu-school">STI College Sta. Mesa</div>
+          <div class="edu-yr">2021 – 2025</div>
+        </div>
       </div>
-      <div class="edu-certs">
-        <div class="edu-certs-title">Certifications</div>
-        <div class="cert-list">
-          <div class="cert-item">
-            <div class="cert-dot"></div>
-            <div>
-              <div class="cert-name">SAP Business One (SAP Advance)</div>
-              <div class="cert-issuer">FIT Academy · 2024</div>
+
+      <div class="cert-box reveal rd2">
+        <div class="cert-title">Certifications</div>
+        <div class="cert-items">
+          <div class="cert-row">
+            <div class="cert-row-left">
+              <div class="cert-pip"></div>
+              <div>
+                <div class="cert-nm">SAP Business One (SAP Advance)</div>
+                <div class="cert-org">FIT Academy</div>
+              </div>
             </div>
+            <div class="cert-yr">2024</div>
           </div>
-          <div class="cert-item">
-            <div class="cert-dot"></div>
-            <div>
-              <div class="cert-name">Java Foundation</div>
-              <div class="cert-issuer">Oracle Academy · 2022</div>
+          <div class="cert-row">
+            <div class="cert-row-left">
+              <div class="cert-pip"></div>
+              <div>
+                <div class="cert-nm">Java Foundation</div>
+                <div class="cert-org">Oracle Academy</div>
+              </div>
             </div>
+            <div class="cert-yr">2022</div>
           </div>
-          <div class="cert-item">
-            <div class="cert-dot"></div>
-            <div>
-              <div class="cert-name">System Administration</div>
-              <div class="cert-issuer">Oracle Academy · 2022</div>
+          <div class="cert-row">
+            <div class="cert-row-left">
+              <div class="cert-pip"></div>
+              <div>
+                <div class="cert-nm">System Administration</div>
+                <div class="cert-org">Oracle Academy</div>
+              </div>
             </div>
+            <div class="cert-yr">2022</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- ══ CONTACT ════════════════════════════════ -->
   <section id="contact">
-    <div class="contact-inner">
-      <div class="contact-tagline reveal">
-        Let's work <span>together.</span>
-      </div>
-      <p class="contact-sub reveal reveal-delay-1">
+    <div class="contact-glow"></div>
+    <div class="contact-wrap">
+      <p class="contact-pre reveal">Say hello</p>
+      <h2 class="contact-heading reveal rd1">
+        Let's work<br><span class="ghost">together.</span>
+      </h2>
+      <p class="contact-sub reveal rd2">
         Open to IT support roles, service desk positions, and interesting dev projects.<br>
         Always learning, improving, and building better systems.
       </p>
-      <div class="contact-links reveal reveal-delay-2">
-        <a href="mailto:jeofsison9@gmail.com" class="contact-link">
+      <div class="contact-btns reveal rd3">
+        <a href="mailto:jeofsison9@gmail.com" class="clink clink-email">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           jeofsison9@gmail.com
         </a>
-        <a href="tel:09217206527" class="contact-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 011 1.18 2 2 0 012.98 0h3a2 2 0 012 1.72c.13 1 .38 1.97.74 2.9a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.18-1.18a2 2 0 012.11-.45c.93.36 1.9.61 2.9.74A2 2 0 0122 14.92z"/></svg>
-          09217206527
-        </a>
-        <a href="https://github.com/R41CY" target="_blank" class="contact-link">
+        <a href="https://github.com/R41CY" target="_blank" class="clink clink-github">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
           github.com/R41CY
         </a>
-        <a href="https://facebook.com/raicy.gov" target="_blank" class="contact-link">
+        <a href="https://facebook.com/raicy.gov" target="_blank" class="clink clink-fb">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
           raicy.gov
         </a>
@@ -365,8 +396,11 @@
 
   <!-- Footer -->
   <footer>
-    <span class="footer-text">© 2026 Jeof Yciar T. Sison &nbsp;·&nbsp; Mandaluyong City, PH</span>
-    <div class="footer-dot" title="Open to work"></div>
+    <span class="footer-txt">© 2026 Jeof Yciar T. Sison</span>
+    <div class="footer-status">
+      <div class="status-pip"></div>
+      Open to work
+    </div>
   </footer>
 
   <script src="script.js"></script>

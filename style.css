@@ -39,19 +39,23 @@ body {
 }
 
 /* ─── CURSOR ─────────────────────────────────── */
-.cursor, .cursor-trail { pointer-events: none; position: fixed; border-radius: 50%; z-index: 9999; top: 0; left: 0; }
+/* Uses transform for position — compositor-only, zero layout cost */
+.cursor, .cursor-trail {
+  pointer-events: none; position: fixed;
+  border-radius: 50%; z-index: 9999;
+  top: 0; left: 0;
+  will-change: transform;
+}
 .cursor {
   width: 10px; height: 10px;
   background: var(--lime);
   box-shadow: 0 0 10px var(--lime), 0 0 20px rgba(163,230,53,0.4);
-  transform: translate(-50%, -50%);
-  transition: width .2s, height .2s, background .2s;
+  transition: width .2s, height .2s, background .2s, box-shadow .2s;
 }
 .cursor.big { width: 16px; height: 16px; background: var(--violet); box-shadow: 0 0 16px var(--violet); }
 .cursor-trail {
   width: 38px; height: 38px;
   border: 1.5px solid rgba(139,92,246,0.5);
-  transform: translate(-50%,-50%);
   transition: width .35s, height .35s, border-color .3s;
   z-index: 9998;
 }
@@ -68,19 +72,21 @@ body {
   position: fixed; inset: 0;
   pointer-events: none; z-index: 1;
   overflow: hidden;
+  contain: strict; /* tell browser this is isolated — big perf win */
 }
 .ab {
   position: absolute; border-radius: 50%;
-  filter: blur(110px); will-change: transform;
+  filter: blur(80px); /* reduced from 110px — less GPU overdraw */
+  will-change: transform;
   animation: adrift 14s ease-in-out infinite;
 }
-.ab1 { width:700px;height:500px; background:radial-gradient(ellipse,rgba(139,92,246,.16) 0%,transparent 70%); top:-150px;left:-200px; }
-.ab2 { width:550px;height:550px; background:radial-gradient(ellipse,rgba(34,211,238,.10) 0%,transparent 70%); top:15%;right:-150px; animation-delay:-5s; }
-.ab3 { width:500px;height:380px; background:radial-gradient(ellipse,rgba(244,114,182,.09) 0%,transparent 70%); bottom:5%;left:15%; animation-delay:-9s; }
-.ab4 { width:400px;height:400px; background:radial-gradient(ellipse,rgba(163,230,53,.07) 0%,transparent 70%); bottom:-60px;right:5%; animation-delay:-3s; }
+.ab1 { width:600px;height:440px; background:radial-gradient(ellipse,rgba(139,92,246,.14) 0%,transparent 70%); top:-150px;left:-200px; }
+.ab2 { width:480px;height:480px; background:radial-gradient(ellipse,rgba(34,211,238,.09) 0%,transparent 70%); top:15%;right:-150px; animation-delay:-5s; }
+.ab3 { width:420px;height:320px; background:radial-gradient(ellipse,rgba(244,114,182,.08) 0%,transparent 70%); bottom:5%;left:15%; animation-delay:-9s; }
+.ab4 { width:340px;height:340px; background:radial-gradient(ellipse,rgba(163,230,53,.06) 0%,transparent 70%); bottom:-60px;right:5%; animation-delay:-3s; }
 @keyframes adrift {
   0%,100%{ transform:translate(0,0) scale(1); }
-  33%    { transform:translate(40px,-30px) scale(1.07); }
+  33%    { transform:translate(40px,-30px) scale(1.06); }
   66%    { transform:translate(-25px,22px) scale(0.96); }
 }
 
@@ -187,7 +193,18 @@ nav.stuck {
   clip-path: inset(0 100% 0 0);
   animation: swipe 1.4s 1.3s cubic-bezier(.77,0,.18,1) forwards;
 }
-@keyframes swipe { to { clip-path: inset(0 0% 0 0); } }
+/* Hero name fill — pure CSS hue drift, no JS setInterval */
+.hero-h1 .fill {
+  animation: swipe 1.4s 1.3s cubic-bezier(.77,0,.18,1) forwards,
+             hueShift 8s 2.8s linear infinite;
+}
+@keyframes hueShift { to { filter: hue-rotate(360deg); } }
+
+/* GPU layer hints for things that animate */
+.stat-box, .skill-card, .proj-card, .exp-card, .cert-row {
+  contain: layout style;
+}
+.htag { will-change: transform; }
 
 /* sub */
 .hero-sub {
@@ -510,6 +527,17 @@ footer {
 ::-webkit-scrollbar-thumb{background:var(--violet);border-radius:2px;}
 ::-webkit-scrollbar-thumb:hover{background:var(--violet2);}
 
+/* ─── REDUCED MOTION ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .aurora, #ptx { display: none; }
+  .reveal { opacity: 1; transform: none; }
+}
+
 /* ─── HAMBURGER MENU ──────────────────────────── */
 .hamburger {
   display: none;
@@ -581,6 +609,17 @@ footer {
 
 /* ─── MOBILE (≤768px) ─────────────────────────── */
 @media(max-width:768px) {
+
+  /* Kill expensive aurora blur on mobile entirely */
+  .aurora { display: none; }
+  /* Simpler static gradient background instead */
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 50% at 10% 20%, rgba(139,92,246,.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 80%, rgba(34,211,238,.06) 0%, transparent 60%);
+  }
 
   /* Nav */
   nav { padding: 16px 20px; }

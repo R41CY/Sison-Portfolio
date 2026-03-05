@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeof Sison · IT Support & Developer</title>
+  <meta name="theme-color" content="#0a0812">
+  <title>Jeof Sison &middot; IT Support &amp; Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -13,9 +14,9 @@
 
   <div class="cursor"></div>
   <div class="cursor-trail"></div>
-  <canvas id="ptx"></canvas>
+  <canvas id="ptx" aria-hidden="true"></canvas>
 
-  <div class="aurora">
+  <div class="aurora" aria-hidden="true">
     <div class="ab ab1"></div>
     <div class="ab ab2"></div>
     <div class="ab ab3"></div>
@@ -23,7 +24,7 @@
   </div>
 
   <!-- Mobile menu overlay -->
-  <div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
@@ -48,62 +49,52 @@
     </button>
   </nav>
 
-  <!-- ▓▓ HERO ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
+  <!-- HERO -->
   <section id="hero">
     <div class="hero-grid-bg"></div>
-
     <div class="hero-inner">
       <div class="hero-left">
-
         <div class="hero-badge">
           <div class="bdot"></div>
           <span class="badge-txt">Open to opportunities</span>
         </div>
-
         <h1 class="hero-h1">
           Jeof<br>
           <span class="stroke">Sison<span class="fill">Sison</span></span>
         </h1>
-
         <p class="hero-sub">
-          <strong>IT Support · Service Desk · Web Dev · Game Dev</strong><br>
-          BS IT Graduate — resolving technical issues, building web systems, and crafting interactive games.
+          <strong>IT Support &middot; Service Desk &middot; Web Dev &middot; Game Dev</strong><br>
+          BS IT Graduate &mdash; resolving technical issues, building web systems, and crafting interactive games.
         </p>
-
         <div class="hero-ctas">
           <a href="#contact" class="btn-v">Get In Touch</a>
-          <a href="https://github.com/R41CY" target="_blank" rel="noopener" class="btn-o">GitHub — R41CY ↗</a>
+          <a href="https://github.com/R41CY" target="_blank" rel="noopener" class="btn-o">GitHub &mdash; R41CY &#8599;</a>
         </div>
-
       </div>
-
-      <div class="hero-tags">
+      <div class="hero-tags" aria-hidden="true">
         <div class="htag"><span class="c-purple">const</span> role = <span class="c-lime">"IT Support"</span></div>
         <div class="htag"><span class="c-cyan">tools</span>.<span class="c-lime">push</span>("ServiceNow")</div>
         <div class="htag"><span class="c-pink">new</span> <span class="c-purple">Unity</span>.Game()</div>
         <div class="htag"><span class="c-lime">PHP</span> + SQL + <span class="c-cyan">WebSockets</span></div>
-        <div class="htag">graduate <span class="c-purple">2025</span> ✓</div>
+        <div class="htag">graduate <span class="c-purple">2025</span> &#10003;</div>
       </div>
     </div>
-
-    <div class="scroll-hint">
+    <div class="scroll-hint" aria-hidden="true">
       <div class="smouse"><div class="swheel"></div></div>
       <span class="slabel">Scroll</span>
     </div>
   </section>
 
-  <!-- ▓▓ ABOUT ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
+  <!-- ABOUT -->
   <section id="about">
     <p class="sec-tag reveal">Introduction</p>
     <h2 class="sec-h reveal d1">Who I <span class="g">Am</span></h2>
-
     <div class="about-grid">
       <div class="about-text reveal d1">
         <p>I'm a <strong>BS Information Technology graduate</strong> with hands-on experience in Service Desk and technical support environments. I help users resolve issues through <em>remote troubleshooting</em>, incident documentation, and structured ticket management.</p>
-        <p>I'm skilled in <strong>SCCM Remote Control, Quick Assist, Microsoft Remote Help</strong>, and Microsoft Teams — experienced verifying order and billing info with Kenan, CSP, Clarity, and Siebel.</p>
-        <p>Beyond support, I co-developed an <strong>internal web ticketing system</strong> during my internship and served as <strong>Lead Game Developer</strong> for my capstone — reflecting genuine curiosity for both the operational and creative sides of technology.</p>
+        <p>I'm skilled in <strong>SCCM Remote Control, Quick Assist, Microsoft Remote Help</strong>, and Microsoft Teams &mdash; experienced verifying order and billing info with Kenan, CSP, Clarity, and Siebel.</p>
+        <p>Beyond support, I co-developed an <strong>internal web ticketing system</strong> during my internship and served as <strong>Lead Game Developer</strong> for my capstone &mdash; reflecting genuine curiosity for both the operational and creative sides of technology.</p>
       </div>
-
       <div class="stat-grid reveal d2">
         <div class="stat-box">
           <div class="sv" data-target="486" data-suffix="h">0h</div>
@@ -125,14 +116,13 @@
     </div>
   </section>
 
-  <!-- ▓▓ SKILLS ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
+  <!-- SKILLS -->
   <section id="skills">
     <p class="sec-tag reveal">Capabilities</p>
     <h2 class="sec-h reveal d1">Technical <span class="g">Skills</span></h2>
-
     <div class="skill-grid">
       <div class="skill-card reveal d1">
-        <span class="sc-icon">🖥️</span>
+        <span class="sc-icon">&#128421;</span>
         <div class="sc-title">IT Support</div>
         <div class="tag-wrap">
           <span class="tag">PC Troubleshooting</span>
@@ -145,7 +135,7 @@
         </div>
       </div>
       <div class="skill-card reveal d2">
-        <span class="sc-icon">🛠️</span>
+        <span class="sc-icon">&#128296;</span>
         <div class="sc-title">Tools &amp; Platforms</div>
         <div class="tag-wrap">
           <span class="tag">ServiceNow</span>
@@ -160,7 +150,7 @@
         </div>
       </div>
       <div class="skill-card reveal d3">
-        <span class="sc-icon">⚙️</span>
+        <span class="sc-icon">&#9881;</span>
         <div class="sc-title">Development</div>
         <div class="tag-wrap">
           <span class="tag">PHP</span>
@@ -179,11 +169,10 @@
     </div>
   </section>
 
-  <!-- ▓▓ EXPERIENCE ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
+  <!-- EXPERIENCE -->
   <section id="experience">
     <p class="sec-tag reveal">Career</p>
     <h2 class="sec-h reveal d1">Work <span class="g">Experience</span></h2>
-
     <div class="timeline">
 
       <div class="tl-row reveal d1">
@@ -192,10 +181,10 @@
           <div class="exp-hdr">
             <div>
               <div class="exp-role">Service Desk Support L1</div>
-              <div class="exp-co">Unison Solutions Delivery, Inc. · Client: AMDOCS / PLDT</div>
-              <div class="exp-dt">July 8, 2025 — March 3, 2026</div>
+              <div class="exp-co">Unison Solutions Delivery, Inc. &middot; Client: AMDOCS / PLDT</div>
+              <div class="exp-dt">July 8, 2025 &mdash; March 3, 2026</div>
             </div>
-            <div class="exp-toggle">
+            <div class="exp-toggle" aria-label="Expand">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
             </div>
           </div>
@@ -221,9 +210,9 @@
             <div>
               <div class="exp-role">Technical Support</div>
               <div class="exp-co">Unison Solutions Delivery, Inc.</div>
-              <div class="exp-dt">June 23, 2025 — July 8, 2025</div>
+              <div class="exp-dt">June 23, 2025 &mdash; July 8, 2025</div>
             </div>
-            <div class="exp-toggle">
+            <div class="exp-toggle" aria-label="Expand">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
             </div>
           </div>
@@ -248,7 +237,7 @@
               <div class="exp-co">Philippines First Insurance Company, Inc.</div>
               <div class="exp-dt">486 Hours Internship</div>
             </div>
-            <div class="exp-toggle">
+            <div class="exp-toggle" aria-label="Expand">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
             </div>
           </div>
@@ -269,17 +258,16 @@
     </div>
   </section>
 
-  <!-- ▓▓ PROJECTS ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
+  <!-- PROJECTS -->
   <section id="projects">
     <p class="sec-tag reveal">Work</p>
     <h2 class="sec-h reveal d1">Featured <span class="g">Projects</span></h2>
-
     <div class="proj-grid">
       <div class="proj-card reveal d1">
         <div class="pcglow pcg1"></div>
-        <div class="picon">🎫</div>
+        <div class="picon">&#127915;</div>
         <div class="pname">Internal Ticketing System</div>
-        <p class="pdesc">A web-based service request platform for office environments — manages tickets end-to-end with real-time updates and automated testing.</p>
+        <p class="pdesc">A web-based service request platform for office environments &mdash; manages tickets end-to-end with real-time updates and automated testing.</p>
         <div class="pfeats">
           <span class="pf">Ticket creation &amp; management</span>
           <span class="pf">Admin dashboard</span>
@@ -294,12 +282,11 @@
           <span class="ps">WebSockets</span>
           <span class="ps">Cypress</span>
         </div>
-        <a href="https://github.com/R41CY" target="_blank" rel="noopener" class="plink">View on GitHub →</a>
+        <a href="https://github.com/R41CY" target="_blank" rel="noopener" class="plink">View on GitHub &#8594;</a>
       </div>
-
       <div class="proj-card reveal d2">
         <div class="pcglow pcg2"></div>
-        <div class="picon">🧠</div>
+        <div class="picon">&#129504;</div>
         <div class="pname">Neural Labyrinth</div>
         <p class="pdesc">Capstone game designed to teach programming concepts interactively through puzzle-based levels. Served as Lead Game Developer.</p>
         <div class="pfeats">
@@ -316,49 +303,38 @@
     </div>
   </section>
 
-  <!-- ▓▓ EDUCATION ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
+  <!-- EDUCATION -->
   <section id="education">
     <p class="sec-tag reveal">Background</p>
     <h2 class="sec-h reveal d1">Education &amp; <span class="g">Certifications</span></h2>
-
     <div class="edu-wrap">
       <div class="edu-box reveal d1">
-        <span class="edu-emoji">🎓</span>
+        <span class="edu-emoji">&#127891;</span>
         <div class="edu-deg">Bachelor of Science in Information Technology</div>
         <div class="edu-school">STI College Sta. Mesa</div>
-        <div class="edu-yr">2021 – 2025</div>
+        <div class="edu-yr">2021 &ndash; 2025</div>
       </div>
-
       <div class="cert-box reveal d2">
         <div class="cert-hed">Certifications</div>
         <div class="cert-list">
           <div class="cert-row">
             <div class="cert-l">
               <div class="cpip"></div>
-              <div>
-                <div class="cnm">SAP Business One (SAP Advance)</div>
-                <div class="corg">FIT Academy</div>
-              </div>
+              <div><div class="cnm">SAP Business One (SAP Advance)</div><div class="corg">FIT Academy</div></div>
             </div>
             <div class="cyr">2024</div>
           </div>
           <div class="cert-row">
             <div class="cert-l">
               <div class="cpip"></div>
-              <div>
-                <div class="cnm">Java Foundation</div>
-                <div class="corg">Oracle Academy</div>
-              </div>
+              <div><div class="cnm">Java Foundation</div><div class="corg">Oracle Academy</div></div>
             </div>
             <div class="cyr">2022</div>
           </div>
           <div class="cert-row">
             <div class="cert-l">
               <div class="cpip"></div>
-              <div>
-                <div class="cnm">System Administration</div>
-                <div class="corg">Oracle Academy</div>
-              </div>
+              <div><div class="cnm">System Administration</div><div class="corg">Oracle Academy</div></div>
             </div>
             <div class="cyr">2022</div>
           </div>
@@ -367,9 +343,9 @@
     </div>
   </section>
 
-  <!-- ▓▓ CONTACT ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
+  <!-- CONTACT -->
   <section id="contact">
-    <div class="contact-glow"></div>
+    <div class="contact-glow" aria-hidden="true"></div>
     <div class="contact-inner">
       <p class="contact-pre reveal">Say hello</p>
       <h2 class="contact-h reveal d1">Let's work<br><span class="ghost">together.</span></h2>
@@ -378,9 +354,10 @@
         Always learning, improving, and building better systems.
       </p>
       <div class="contact-links reveal d3">
-        <a href="/cdn-cgi/l/email-protection#066c636960756f7569683f46616b676f6a2865696b" class="clink clink-em">
+        <!-- Email encoded as HTML entities to prevent bot harvesting -->
+        <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#101;&#111;&#102;&#115;&#105;&#115;&#111;&#110;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;" class="clink clink-em">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span class="__cf_email__" data-cfemail="19737c767f6a706a767720597e74787075377a7674">[email&#160;protected]</span>
+          jeofsison9&#64;gmail.com
         </a>
         <a href="https://github.com/R41CY" target="_blank" rel="noopener" class="clink clink-gh">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
@@ -395,4 +372,10 @@
   </section>
 
   <footer>
-    <span class="ftxt">© 2026 Jeof Yciar T. Sison</spa
+    <span class="ftxt">&copy; 2026 Jeof Yciar T. Sison</span>
+    <div class="fstatus"><div class="fpip"></div> Open to work</div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

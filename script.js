@@ -1,28 +1,68 @@
 'use strict';
 
 // ═══════════════════════════════════
-//  CURSOR
+//  CURSOR (desktop only)
 // ═══════════════════════════════════
 const cur  = document.querySelector('.cursor');
 const trail= document.querySelector('.cursor-trail');
 let mx=0,my=0,tx=0,ty=0;
+const hasTouch = window.matchMedia('(hover: none)').matches;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cur.style.left = mx+'px'; cur.style.top = my+'px';
+if(!hasTouch){
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx+'px'; cur.style.top = my+'px';
+  });
+
+  (function loopTrail(){
+    tx += (mx - tx) * 0.11;
+    ty += (my - ty) * 0.11;
+    trail.style.left = tx+'px'; trail.style.top = ty+'px';
+    requestAnimationFrame(loopTrail);
+  })();
+
+  document.querySelectorAll('a,button,.stat-box,.proj-card,.skill-card,.tag,.exp-hdr').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ cur.classList.add('big'); trail.classList.add('big'); });
+    el.addEventListener('mouseleave',()=>{ cur.classList.remove('big'); trail.classList.remove('big'); });
+  });
+}
+
+
+// ═══════════════════════════════════
+//  HAMBURGER MENU
+// ═══════════════════════════════════
+const burger = document.getElementById('hamburger');
+const mMenu  = document.getElementById('mobile-menu');
+
+function openMenu(){
+  mMenu.style.display = 'flex';
+  requestAnimationFrame(()=> mMenu.classList.add('open'));
+  burger.classList.add('open');
+  burger.setAttribute('aria-label','Close menu');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu(){
+  mMenu.classList.remove('open');
+  burger.classList.remove('open');
+  burger.setAttribute('aria-label','Open menu');
+  document.body.style.overflow = '';
+  setTimeout(()=>{ mMenu.style.display = 'none'; }, 350);
+}
+
+burger.addEventListener('click',()=>{
+  burger.classList.contains('open') ? closeMenu() : openMenu();
 });
 
-(function loopTrail(){
-  tx += (mx - tx) * 0.11;
-  ty += (my - ty) * 0.11;
-  trail.style.left = tx+'px'; trail.style.top = ty+'px';
-  requestAnimationFrame(loopTrail);
-})();
-
-document.querySelectorAll('a,button,.stat-box,.proj-card,.skill-card,.tag,.exp-hdr').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ cur.classList.add('big'); trail.classList.add('big'); });
-  el.addEventListener('mouseleave',()=>{ cur.classList.remove('big'); trail.classList.remove('big'); });
+mMenu.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    closeMenu();
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target) setTimeout(()=> target.scrollIntoView({behavior:'smooth'}), 60);
+  });
 });
+
+// Close on escape key
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
 
 
 // ═══════════════════════════════════
@@ -52,7 +92,9 @@ function mkParticle(){
   };
 }
 
-const pts = Array.from({length:80}, mkParticle);
+// Fewer particles on mobile for performance
+const count = window.innerWidth < 768 ? 40 : 80;
+const pts = Array.from({length:count}, mkParticle);
 
 function drawLines(){
   for(let i=0;i<pts.length;i++){
@@ -71,7 +113,7 @@ function drawLines(){
 (function loopPts(){
   ctx.clearRect(0,0,W,H);
   drawLines();
-  pts.forEach((p,i)=>{
+  pts.forEach((p)=>{
     p.life++;
     if(p.life>p.max){ Object.assign(p, mkParticle()); p.x=Math.random()*W; p.y=Math.random()*H; }
     p.x+=p.vx; p.y+=p.vy;
@@ -108,7 +150,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 // ═══════════════════════════════════
 const io = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
 
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
@@ -149,7 +191,7 @@ const cio=new IntersectionObserver(entries=>{
       cio.unobserve(e.target);
     }
   });
-},{threshold:.6});
+},{threshold:.5});
 document.querySelectorAll('[data-target]').forEach(el=>cio.observe(el));
 
 
@@ -157,7 +199,7 @@ document.querySelectorAll('[data-target]').forEach(el=>cio.observe(el));
 //  ACTIVE NAV
 // ═══════════════════════════════════
 const secs  = document.querySelectorAll('section[id]');
-const links = document.querySelectorAll('.nav-links a');
+const links = document.querySelectorAll('.nav-links a, .mobile-menu a');
 const sio   = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -165,36 +207,37 @@ const sio   = new IntersectionObserver(entries=>{
       links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
     }
   });
-},{threshold:.45});
+},{threshold:.35});
 secs.forEach(s=>sio.observe(s));
 
 
 // ═══════════════════════════════════
-//  MAGNETIC STAT BOXES
+//  MAGNETIC STAT BOXES (desktop only)
 // ═══════════════════════════════════
-document.querySelectorAll('.stat-box').forEach(box=>{
-  box.addEventListener('mousemove',e=>{
-    const r=box.getBoundingClientRect();
-    const dx=(e.clientX-r.left-r.width/2)*.14;
-    const dy=(e.clientY-r.top-r.height/2)*.14;
-    box.style.transform=`translate(${dx}px,${dy}px) translateY(-6px) scale(1.03)`;
+if(!hasTouch){
+  document.querySelectorAll('.stat-box').forEach(box=>{
+    box.addEventListener('mousemove',e=>{
+      const r=box.getBoundingClientRect();
+      const dx=(e.clientX-r.left-r.width/2)*.14;
+      const dy=(e.clientY-r.top-r.height/2)*.14;
+      box.style.transform=`translate(${dx}px,${dy}px) translateY(-6px) scale(1.03)`;
+    });
+    box.addEventListener('mouseleave',()=>box.style.transform='');
   });
-  box.addEventListener('mouseleave',()=>box.style.transform='');
-});
 
-
-// ═══════════════════════════════════
-//  3D TILT PROJECT CARDS
-// ═══════════════════════════════════
-document.querySelectorAll('.proj-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    card.style.transform=`perspective(900px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-10px)`;
+  // ═══════════════════════════════════
+  //  3D TILT PROJECT CARDS (desktop only)
+  // ═══════════════════════════════════
+  document.querySelectorAll('.proj-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(900px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-10px)`;
+    });
+    card.addEventListener('mouseleave',()=>card.style.transform='');
   });
-  card.addEventListener('mouseleave',()=>card.style.transform='');
-});
+}
 
 
 // ═══════════════════════════════════
@@ -205,3 +248,4 @@ if(fill){
   let h=0;
   setInterval(()=>{ h=(h+0.4)%360; fill.style.filter=`hue-rotate(${h*.12}deg)`; },30);
 }
+

@@ -21,7 +21,7 @@ function animateRing() {
 }
 animateRing();
 
-document.querySelectorAll('a, button, .exp-header, .stat-card, .project-card').forEach(el => {
+document.querySelectorAll('a, button, .exp-header, .stat-card, .project-card, .skill-tag').forEach(el => {
   el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
   el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
 });
@@ -29,11 +29,7 @@ document.querySelectorAll('a, button, .exp-header, .stat-card, .project-card').f
 // === NAV SCROLL ===
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 40) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
+  nav.classList.toggle('scrolled', window.scrollY > 40);
 });
 
 // === SMOOTH SCROLL ===
@@ -50,9 +46,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // === SCROLL REVEAL ===
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
@@ -68,7 +62,7 @@ document.querySelectorAll('.exp-header').forEach(header => {
   });
 });
 
-// Open first one by default
+// Open first card by default
 const firstCard = document.querySelector('.exp-card');
 if (firstCard) firstCard.classList.add('open');
 
@@ -89,32 +83,13 @@ const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const el = entry.target;
-      animateCounter(el, parseInt(el.dataset.target), 1200);
+      animateCounter(el, parseInt(el.dataset.target), 1400);
       counterObserver.unobserve(el);
     }
   });
 }, { threshold: 0.5 });
 
 document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
-
-// === SKILL TAG HOVER RIPPLE ===
-document.querySelectorAll('.skill-tag').forEach(tag => {
-  tag.addEventListener('mousemove', (e) => {
-    const rect = tag.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    tag.style.setProperty('--mx', x + '%');
-    tag.style.setProperty('--my', y + '%');
-  });
-});
-
-// === GLITCH HERO TEXT ON LOAD ===
-const heroName = document.querySelector('.hero-name');
-if (heroName) {
-  setTimeout(() => {
-    heroName.style.animation = 'none';
-  }, 3000);
-}
 
 // === ACTIVE NAV HIGHLIGHT ===
 const sections = document.querySelectorAll('section[id]');

@@ -33,6 +33,26 @@ body {
   overflow-x: hidden;
 }
 
+/* CURSOR (desktop only) */
+.cursor, .cursor-trail {
+  pointer-events: none; position: fixed; top: 0; left: 0;
+  border-radius: 50%; z-index: 9999; will-change: transform;
+}
+.cursor {
+  width: 10px; height: 10px;
+  background: var(--lime);
+  box-shadow: 0 0 10px var(--lime), 0 0 18px rgba(163,230,53,.3);
+  transition: width .2s, height .2s, background .2s;
+}
+.cursor.big { width: 15px; height: 15px; background: var(--v); box-shadow: 0 0 14px var(--v); }
+.cursor-trail {
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(139,92,246,.45);
+  transition: width .3s, height .3s, border-color .3s; z-index: 9998;
+}
+.cursor-trail.big { width: 56px; height: 56px; border-color: rgba(163,230,53,.5); }
+@media (hover: none) { .cursor, .cursor-trail { display: none; } }
+
 /* SUBTLE STATIC BG - no blur, no canvas, no animation */
 body::before {
   content: '';

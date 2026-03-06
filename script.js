@@ -1,6 +1,94 @@
 'use strict';
 
-// NAV sticky
+// ── CURSOR + TRAIL + RIPPLE (desktop only) ────────────
+const isTouch = window.matchMedia('(hover:none)').matches;
+
+if (!isTouch) {
+  const cur   = document.querySelector('.cursor');
+  const trail = document.querySelector('.cursor-trail');
+  let mx = 0, my = 0, tx = 0, ty = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%))`;
+    spawnTrailDot(mx, my);
+  }, { passive: true });
+
+  (function loopTrail() {
+    tx += (mx - tx) * 0.12;
+    ty += (my - ty) * 0.12;
+    trail.style.transform = `translate(calc(${tx}px - 50%), calc(${ty}px - 50%))`;
+    requestAnimationFrame(loopTrail);
+  })();
+
+  // Expand cursor on interactive elements
+  document.querySelectorAll('a, button, .stat-box, .proj-card, .skill-card, .tag').forEach(el => {
+    el.addEventListener('mouseenter', () => { cur.classList.add('big'); trail.classList.add('big'); });
+    el.addEventListener('mouseleave', () => { cur.classList.remove('big'); trail.classList.remove('big'); });
+  });
+
+  // Trail dots — tiny glowing particles that follow the cursor
+  const TRAIL_COLORS = ['#a78bfa', '#a3e635', '#22d3ee', '#f472b6'];
+  let lastDot = 0;
+
+  function spawnTrailDot(x, y) {
+    const now = Date.now();
+    if (now - lastDot < 38) return; // ~26 dots/sec max
+    lastDot = now;
+
+    const el    = document.createElement('div');
+    const size  = Math.random() * 5 + 3;
+    const color = TRAIL_COLORS[Math.floor(Math.random() * TRAIL_COLORS.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const dist  = Math.random() * 20 + 6;
+
+    el.style.cssText = `
+      position:fixed;pointer-events:none;z-index:9990;
+      width:${size}px;height:${size}px;border-radius:50%;
+      background:${color};box-shadow:0 0 ${size * 2}px ${color};
+      left:${x}px;top:${y}px;
+      transform:translate(-50%,-50%);
+      opacity:0.8;
+      transition:transform 0.5s ease,opacity 0.5s ease;
+    `;
+    document.body.appendChild(el);
+
+    requestAnimationFrame(() => {
+      el.style.transform = `translate(calc(-50% + ${Math.cos(angle)*dist}px), calc(-50% + ${Math.sin(angle)*dist}px)) scale(0)`;
+      el.style.opacity = '0';
+    });
+
+    setTimeout(() => el.remove(), 520);
+  }
+
+  // Click ripple — two expanding rings on every click
+  document.addEventListener('click', e => {
+    spawnRipple(e.clientX, e.clientY, 'var(--lime)',  8,  8,  0.55,  0);
+    spawnRipple(e.clientX, e.clientY, 'var(--v2)',    6, 12,  0.70,  80);
+  });
+
+  function spawnRipple(x, y, color, size, scale, dur, delay) {
+    const el = document.createElement('div');
+    el.style.cssText = `
+      position:fixed;pointer-events:none;z-index:9989;
+      width:${size}px;height:${size}px;border-radius:50%;
+      border:1.5px solid ${color};
+      left:${x}px;top:${y}px;
+      transform:translate(-50%,-50%) scale(1);
+      opacity:1;
+      transition:transform ${dur}s ${delay}ms cubic-bezier(0,.5,.5,1),
+                 opacity   ${dur}s ${delay}ms ease;
+    `;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => {
+      el.style.transform = `translate(-50%,-50%) scale(${scale})`;
+      el.style.opacity   = '0';
+    });
+    setTimeout(() => el.remove(), (dur + delay/1000 + 0.1) * 1000);
+  }
+}
+
+
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('stuck', scrollY > 50);

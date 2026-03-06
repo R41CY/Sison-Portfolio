@@ -185,7 +185,7 @@ const audio      = document.getElementById('bg-music');
 const musicBtn   = document.getElementById('music-btn');
 const musicPanel = document.getElementById('music-player');
 
-audio.volume = 0.15;
+audio.volume = 0.05;
 
 function setPlaying(on) {
   musicPanel.classList.toggle('playing', on);
@@ -201,11 +201,13 @@ musicBtn.addEventListener('click', e => {
   if (audio.paused) { playMusic(); } else { audio.pause(); setPlaying(false); }
 });
 
-// Autoplay on first interaction (desktop + some mobile)
+// Autoplay on first interaction — scroll, click, touch, keydown all trigger it
+let started = false;
 function onFirstInteraction() {
-  if (!audio.paused) return;
+  if (started) return;
+  started = true;
   playMusic();
 }
-['click', 'scroll', 'keydown', 'touchstart', 'mousemove'].forEach(evt => {
-  document.addEventListener(evt, onFirstInteraction, { once: true, passive: true });
+['click', 'scroll', 'keydown', 'touchstart', 'touchmove', 'mousemove'].forEach(evt => {
+  window.addEventListener(evt, onFirstInteraction, { passive: true });
 });

@@ -184,7 +184,6 @@ if (!window.matchMedia('(hover:none)').matches) {
 const audio      = document.getElementById('bg-music');
 const musicBtn   = document.getElementById('music-btn');
 const musicPanel = document.getElementById('music-player');
-const splash     = document.getElementById('splash');
 
 audio.volume = 0.15;
 
@@ -196,17 +195,10 @@ function playMusic() {
   audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
 }
 
-// Toggle on button click
+// Button always works since it's a direct user gesture
 musicBtn.addEventListener('click', () => {
   if (audio.paused) { playMusic(); } else { audio.pause(); setPlaying(false); }
 });
 
-// Splash tap — this IS the user gesture, so audio.play() will always work here
-splash.addEventListener('click', () => {
-  splash.classList.add('hide');
-  playMusic();
-});
-splash.addEventListener('touchend', () => {
-  splash.classList.add('hide');
-  playMusic();
-}, { passive: true });
+// Try autoplay on desktop (works there, silently fails on mobile — that's fine)
+playMusic();

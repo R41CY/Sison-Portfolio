@@ -205,8 +205,10 @@ musicBtn.addEventListener('click', e => {
 let started = false;
 function onFirstInteraction() {
   if (started) return;
-  started = true;
-  playMusic();
+  audio.play().then(() => {
+    started = true;
+    setPlaying(true);
+  }).catch(() => {});
 }
 ['click', 'scroll', 'keydown', 'touchstart', 'touchmove', 'mousemove'].forEach(evt => {
   window.addEventListener(evt, onFirstInteraction, { passive: true });

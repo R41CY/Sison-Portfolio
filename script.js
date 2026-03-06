@@ -184,8 +184,9 @@ if (!window.matchMedia('(hover:none)').matches) {
 const audio      = document.getElementById('bg-music');
 const musicBtn   = document.getElementById('music-btn');
 const musicPanel = document.getElementById('music-player');
+const splash     = document.getElementById('splash');
 
-audio.volume = 0.4;
+audio.volume = 0.15;
 
 function setPlaying(on) {
   musicPanel.classList.toggle('playing', on);
@@ -195,23 +196,17 @@ function playMusic() {
   audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
 }
 
+// Toggle on button click
 musicBtn.addEventListener('click', () => {
-  if (audio.paused) {
-    playMusic();
-  } else {
-    audio.pause();
-    setPlaying(false);
-  }
+  if (audio.paused) { playMusic(); } else { audio.pause(); setPlaying(false); }
 });
 
-// Try immediate autoplay first (works on some browsers/situations)
-playMusic();
-
-// If that failed, autoplay on very first user interaction
-function onFirstInteraction() {
-  if (!audio.paused) return; // already playing
+// Splash tap — this IS the user gesture, so audio.play() will always work here
+splash.addEventListener('click', () => {
+  splash.classList.add('hide');
   playMusic();
-}
-['click','scroll','keydown','touchstart','mousemove'].forEach(evt => {
-  document.addEventListener(evt, onFirstInteraction, { once: true, passive: true });
 });
+splash.addEventListener('touchend', () => {
+  splash.classList.add('hide');
+  playMusic();
+}, { passive: true });

@@ -195,10 +195,17 @@ function playMusic() {
   audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
 }
 
-// Button always works since it's a direct user gesture
-musicBtn.addEventListener('click', () => {
+// Button always works — direct user gesture
+musicBtn.addEventListener('click', e => {
+  e.stopPropagation();
   if (audio.paused) { playMusic(); } else { audio.pause(); setPlaying(false); }
 });
 
-// Try autoplay on desktop (works there, silently fails on mobile — that's fine)
-playMusic();
+// Autoplay on first interaction (desktop + some mobile)
+function onFirstInteraction() {
+  if (!audio.paused) return;
+  playMusic();
+}
+['click', 'scroll', 'keydown', 'touchstart', 'mousemove'].forEach(evt => {
+  document.addEventListener(evt, onFirstInteraction, { once: true, passive: true });
+});

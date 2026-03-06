@@ -187,35 +187,31 @@ const musicPanel = document.getElementById('music-player');
 
 audio.volume = 0.4;
 
-function playMusic() {
-  audio.play().then(() => {
-    musicPanel.classList.add('playing');
-  }).catch(() => {});
+function setPlaying(on) {
+  musicPanel.classList.toggle('playing', on);
 }
 
-function toggleMusic() {
+function playMusic() {
+  audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+}
+
+musicBtn.addEventListener('click', () => {
   if (audio.paused) {
     playMusic();
   } else {
     audio.pause();
-    musicPanel.classList.remove('playing');
+    setPlaying(false);
   }
-}
+});
 
-musicBtn.addEventListener('click', toggleMusic);
+// Try immediate autoplay first (works on some browsers/situations)
+playMusic();
 
-// Autoplay on first user interaction with the page
-let autoplayed = false;
-function tryAutoplay() {
-  if (autoplayed) return;
-  autoplayed = true;
+// If that failed, autoplay on very first user interaction
+function onFirstInteraction() {
+  if (!audio.paused) return; // already playing
   playMusic();
-  document.removeEventListener('click',     tryAutoplay);
-  document.removeEventListener('scroll',    tryAutoplay);
-  document.removeEventListener('keydown',   tryAutoplay);
-  document.removeEventListener('touchstart',tryAutoplay);
 }
-document.addEventListener('click',      tryAutoplay, { once: true, passive: true });
-document.addEventListener('scroll',     tryAutoplay, { once: true, passive: true });
-document.addEventListener('keydown',    tryAutoplay, { once: true, passive: true });
-document.addEventListener('touchstart', tryAutoplay, { once: true, passive: true });
+['click','scroll','keydown','touchstart','mousemove'].forEach(evt => {
+  document.addEventListener(evt, onFirstInteraction, { once: true, passive: true });
+});

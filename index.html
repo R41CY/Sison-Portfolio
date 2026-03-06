@@ -12,6 +12,18 @@
 </head>
 <body>
 
+  <!-- Music Player -->
+  <div class="music-player" id="music-player">
+    <button class="music-btn" id="music-btn" aria-label="Play music">
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+    <div class="music-bars" id="music-bars">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+  <audio id="bg-music" src="music.mp3" loop></audio>
+
   <!-- Custom cursor (desktop only) -->
   <div class="cursor"></div>
   <div class="cursor-trail"></div>

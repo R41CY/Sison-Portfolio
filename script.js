@@ -179,3 +179,43 @@ if (!window.matchMedia('(hover:none)').matches) {
     card.addEventListener('mouseleave', () => card.style.transform = '');
   });
 }
+
+// ── MUSIC PLAYER ─────────────────────────────────────
+const audio      = document.getElementById('bg-music');
+const musicBtn   = document.getElementById('music-btn');
+const musicPanel = document.getElementById('music-player');
+
+audio.volume = 0.4;
+
+function playMusic() {
+  audio.play().then(() => {
+    musicPanel.classList.add('playing');
+  }).catch(() => {});
+}
+
+function toggleMusic() {
+  if (audio.paused) {
+    playMusic();
+  } else {
+    audio.pause();
+    musicPanel.classList.remove('playing');
+  }
+}
+
+musicBtn.addEventListener('click', toggleMusic);
+
+// Autoplay on first user interaction with the page
+let autoplayed = false;
+function tryAutoplay() {
+  if (autoplayed) return;
+  autoplayed = true;
+  playMusic();
+  document.removeEventListener('click',     tryAutoplay);
+  document.removeEventListener('scroll',    tryAutoplay);
+  document.removeEventListener('keydown',   tryAutoplay);
+  document.removeEventListener('touchstart',tryAutoplay);
+}
+document.addEventListener('click',      tryAutoplay, { once: true, passive: true });
+document.addEventListener('scroll',     tryAutoplay, { once: true, passive: true });
+document.addEventListener('keydown',    tryAutoplay, { once: true, passive: true });
+document.addEventListener('touchstart', tryAutoplay, { once: true, passive: true });

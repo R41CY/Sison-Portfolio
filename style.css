@@ -204,6 +204,10 @@ nav.stuck {
   display: flex; align-items: center;
   padding: 130px 60px 80px; overflow: hidden;
 }
+#particles {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%; pointer-events: none;
+}
 .hero-grid {
   position: absolute; inset: 0; z-index: 0;
   background-image:
@@ -212,6 +216,46 @@ nav.stuck {
   background-size: 70px 70px;
   mask-image: radial-gradient(ellipse 80% 80% at 20% 50%, black, transparent);
   -webkit-mask-image: radial-gradient(ellipse 80% 80% at 20% 50%, black, transparent);
+}
+
+/* TYPEWRITER CURSOR */
+.typewriter-cursor {
+  display: inline-block; width: 2px; height: 1em;
+  background: var(--v2); margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: tw-blink .7s step-end infinite;
+}
+@keyframes tw-blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+/* SECTION GLOW ORB */
+.glow-orb {
+  position: fixed; width: 320px; height: 320px;
+  border-radius: 50%; pointer-events: none; z-index: 1;
+  background: radial-gradient(circle, rgba(139,92,246,.07), transparent 70%);
+  transform: translate(-50%,-50%);
+  transition: left .4s cubic-bezier(.16,1,.3,1), top .4s cubic-bezier(.16,1,.3,1), opacity .3s;
+  opacity: 0; will-change: left, top;
+}
+.glow-orb.visible { opacity: 1; }
+
+/* TEXT SCRAMBLE */
+.sec-h .scramble-letter {
+  display: inline-block;
+  transition: opacity .05s;
+}
+
+/* SECTION DIVIDERS */
+.section-divider {
+  position: absolute; bottom: -1px; left: 0; width: 100%; overflow: hidden; line-height: 0; z-index: 3;
+}
+.section-divider svg {
+  position: relative; display: block; width: calc(100% + 1.3px); height: 50px;
+}
+.section-divider .shape-fill {
+  fill: var(--bg2);
+}
+.section-divider.flip .shape-fill {
+  fill: var(--bg);
 }
 .hero-inner {
   position: relative; z-index: 1;
@@ -452,6 +496,8 @@ section { position: relative; z-index: 2; padding: 100px 60px; }
 /* PROJECTS */
 #projects { background: var(--bg); }
 .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.proj-grid .proj-card:nth-child(3) .pf svg { color: #fb923c; }
+.proj-grid .proj-card:nth-child(4) .pf svg { color: var(--pink); }
 .proj-card {
   background: var(--surf); border: 1px solid var(--bdr); border-radius: 20px;
   padding: 34px; display: flex; flex-direction: column;
@@ -466,6 +512,8 @@ section { position: relative; z-index: 2; padding: 100px 60px; }
 .proj-card:hover .pcglow { opacity: 1; }
 .pcg1 { background: radial-gradient(circle, rgba(139,92,246,.22), transparent 70%); }
 .pcg2 { background: radial-gradient(circle, rgba(163,230,53,.18), transparent 70%); }
+.pcg3 { background: radial-gradient(circle, rgba(251,146,60,.20), transparent 70%); }
+.pcg4 { background: radial-gradient(circle, rgba(244,114,182,.20), transparent 70%); }
 .proj-card:hover { border-color: rgba(139,92,246,.4); box-shadow: 0 28px 70px rgba(0,0,0,.4); }
 .picon {
   width: 56px; height: 56px; border-radius: 14px;
@@ -474,6 +522,8 @@ section { position: relative; z-index: 2; padding: 100px 60px; }
   margin-bottom: 20px; transition: transform .3s, border-color .3s;
 }
 .picon-lime { border-color: rgba(163,230,53,.2); }
+.picon-orange { border-color: rgba(251,146,60,.2); }
+.picon-pink { border-color: rgba(244,114,182,.2); }
 .proj-card:hover .picon { transform: scale(1.08) rotate(-5deg); border-color: var(--bdr2); }
 .pname { font-family: var(--fh); font-weight: 800; font-size: 20px; color: #fff; margin-bottom: 10px; position: relative; z-index: 1; }
 .pdesc { color: var(--mut); font-size: 14px; line-height: 1.75; margin-bottom: 18px; font-weight: 300; position: relative; z-index: 1; }
@@ -482,8 +532,10 @@ section { position: relative; z-index: 2; padding: 100px 60px; }
   font-size: 11.5px; color: var(--m2); background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
   padding: 5px 10px; border-radius: 6px;
   display: inline-flex; align-items: center; gap: 5px;
-  transition: all .2s;
+  transition: all .3s cubic-bezier(.16,1,.3,1);
+  opacity: 0; transform: translateY(10px);
 }
+.pf.pf-visible { opacity: 1; transform: translateY(0); }
 .pf svg { color: var(--lime); flex-shrink: 0; }
 .pf:hover { border-color: rgba(163,230,53,.2); color: var(--mut); background: rgba(163,230,53,.04); }
 .pstack { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; position: relative; z-index: 1; }

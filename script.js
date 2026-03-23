@@ -3,6 +3,87 @@
 (function () {
   const isTouch = window.matchMedia('(hover:none)').matches;
 
+  // ── PARTICLE CANVAS (hero background) ─────────────────
+  (function initParticles() {
+    const canvas = document.getElementById('particles');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [], mouseX = -9999, mouseY = -9999;
+
+    function resize() {
+      const hero = canvas.parentElement;
+      W = canvas.width = hero.offsetWidth;
+      H = canvas.height = hero.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    const COUNT = isTouch ? 40 : 80;
+    const COLORS = ['rgba(139,92,246,.5)', 'rgba(163,230,53,.4)', 'rgba(34,211,238,.4)', 'rgba(244,114,182,.35)'];
+
+    for (let i = 0; i < COUNT; i++) {
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        r: Math.random() * 2 + 1,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)]
+      });
+    }
+
+    if (!isTouch) {
+      const hero = canvas.parentElement;
+      hero.addEventListener('mousemove', e => {
+        const r = hero.getBoundingClientRect();
+        mouseX = e.clientX - r.left;
+        mouseY = e.clientY - r.top;
+      }, { passive: true });
+      hero.addEventListener('mouseleave', () => { mouseX = -9999; mouseY = -9999; }, { passive: true });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        // mouse repulsion
+        const dx = p.x - mouseX, dy = p.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120 && dist > 0) {
+          const force = (120 - dist) / 120 * 0.8;
+          p.vx += (dx / dist) * force;
+          p.vy += (dy / dist) * force;
+        }
+        p.vx *= 0.98; p.vy *= 0.98;
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+
+        // connect nearby particles
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const ddx = p.x - q.x, ddy = p.y - q.y;
+          const d = Math.sqrt(ddx * ddx + ddy * ddy);
+          if (d < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(139,92,246,${0.12 * (1 - d / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
   // ── CUSTOM CURSOR (desktop only) ──────────────────────
   if (!isTouch) {
     const cur = document.querySelector('.cursor');
@@ -88,6 +169,32 @@
       });
       setTimeout(() => el.remove(), (dur + delay / 1000 + 0.1) * 1000);
     }
+
+    // ── MAGNETIC BUTTONS (desktop only) ──────────────────
+    document.querySelectorAll('.btn-v, .btn-o').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const dx = (e.clientX - cx) * 0.25;
+        const dy = (e.clientY - cy) * 0.25;
+        btn.style.transform = `translate(${dx}px, ${dy}px)`;
+      }, { passive: true });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+
+    // ── GLOW ORB (desktop only) ──────────────────────────
+    const orb = document.createElement('div');
+    orb.className = 'glow-orb';
+    document.body.appendChild(orb);
+
+    document.addEventListener('mousemove', e => {
+      orb.style.left = e.clientX + 'px';
+      orb.style.top = e.clientY + 'px';
+      orb.classList.add('visible');
+    }, { passive: true });
   }
 
   // ── DISABLE RIGHT-CLICK ──────────────────────────────
@@ -198,9 +305,24 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // ── 3D TILT ON PROJECT CARDS (desktop only) ───────────
+  // ── STAGGERED FEATURE REVEAL ──────────────────────────
+  const featureObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const features = entry.target.querySelectorAll('.pf');
+        features.forEach((pf, i) => {
+          setTimeout(() => pf.classList.add('pf-visible'), i * 100);
+        });
+        featureObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.proj-card').forEach(card => featureObserver.observe(card));
+
+  // ── 3D TILT ON PROJECT + SKILL CARDS (desktop only) ───
   if (!isTouch) {
-    document.querySelectorAll('.proj-card').forEach(card => {
+    document.querySelectorAll('.proj-card, .skill-card').forEach(card => {
       card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width - 0.5;
@@ -213,6 +335,93 @@
       });
     });
   }
+
+  // ── TEXT SCRAMBLE ON SECTION HEADINGS ──────────────────
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*01234';
+
+  function scrambleText(el) {
+    const original = el.textContent;
+    const len = original.length;
+    let iteration = 0;
+
+    const interval = setInterval(() => {
+      el.textContent = original
+        .split('')
+        .map((ch, i) => {
+          if (ch === ' ' || ch === '\n') return ch;
+          if (i < iteration) return original[i];
+          return CHARS[Math.floor(Math.random() * CHARS.length)];
+        })
+        .join('');
+      iteration += 1;
+      if (iteration > len) {
+        el.textContent = original;
+        clearInterval(interval);
+      }
+    }, 28);
+  }
+
+  const headingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Only scramble the text nodes, leave .g span alone
+        const h = entry.target;
+        const gSpan = h.querySelector('.g');
+        const textBefore = h.childNodes[0];
+        if (textBefore && textBefore.nodeType === 3 && gSpan) {
+          const origText = textBefore.textContent;
+          const origG = gSpan.textContent;
+          let iter = 0;
+          const totalLen = origText.length + origG.length;
+          const interval = setInterval(() => {
+            textBefore.textContent = origText.split('').map((ch, i) => {
+              if (ch === ' ') return ch;
+              return i < iter ? origText[i] : CHARS[Math.floor(Math.random() * CHARS.length)];
+            }).join('');
+            gSpan.textContent = origG.split('').map((ch, i) => {
+              const gi = origText.length + i;
+              if (ch === ' ') return ch;
+              return gi < iter ? origG[i] : CHARS[Math.floor(Math.random() * CHARS.length)];
+            }).join('');
+            iter++;
+            if (iter > totalLen) {
+              textBefore.textContent = origText;
+              gSpan.textContent = origG;
+              clearInterval(interval);
+            }
+          }, 30);
+        }
+        headingObserver.unobserve(h);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.sec-h').forEach(h => headingObserver.observe(h));
+
+  // ── TYPEWRITER EFFECT ON HERO SUBTITLE ────────────────
+  (function typewriter() {
+    const heroSub = document.querySelector('.hero-sub');
+    if (!heroSub) return;
+    const strong = heroSub.querySelector('strong');
+    if (!strong) return;
+    const fullText = strong.textContent;
+    strong.textContent = '';
+    const cursor = document.createElement('span');
+    cursor.className = 'typewriter-cursor';
+    strong.appendChild(cursor);
+
+    let i = 0;
+    function type() {
+      if (i < fullText.length) {
+        strong.insertBefore(document.createTextNode(fullText[i]), cursor);
+        i++;
+        setTimeout(type, 45 + Math.random() * 35);
+      } else {
+        setTimeout(() => cursor.remove(), 2000);
+      }
+    }
+    setTimeout(type, 800);
+  })();
 
   // ── BACK TO TOP + HIDE FLOATS AT FOOTER ──────────────
   const backToTop = document.getElementById('back-to-top');

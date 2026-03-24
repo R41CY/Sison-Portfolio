@@ -562,10 +562,10 @@
     ctx.scale(squish, squishY);
 
     function drawStarPath(cx, cy, spikes, outerRadius, innerRadius) {
-      var rot = Math.PI / 2 * 3;
+      var rot = (Math.PI / 2 * 3) + (gameTime * 0.002); // Add rotation
       var x = cx, y = cy, step = Math.PI / spikes;
       ctx.beginPath();
-      ctx.moveTo(cx, cy - outerRadius);
+      ctx.moveTo(cx + Math.cos(rot) * outerRadius, cy + Math.sin(rot) * outerRadius);
       for (var i = 0; i < spikes; i++) {
         x = cx + Math.cos(rot) * outerRadius;
         y = cy + Math.sin(rot) * outerRadius;
@@ -576,7 +576,6 @@
         ctx.lineTo(x, y);
         rot += step;
       }
-      ctx.lineTo(cx, cy - outerRadius);
       ctx.closePath();
     }
 
@@ -586,7 +585,8 @@
     starGrad.addColorStop(0.4, '#a78bfa');
     starGrad.addColorStop(1, '#7c3aed');
     
-    drawStarPath(0, 0, 5, bodyR, bodyR * 0.45);
+    // Sharper star: innerRadius is 0.4 of outerRadius
+    drawStarPath(0, 0, 5, bodyR, bodyR * 0.4);
     ctx.fillStyle = starGrad;
     ctx.fill();
 
@@ -664,6 +664,7 @@
     if (dir === 'right' && !c.right && player.x < COLS - 1) newX++;
 
     if (newX !== player.x || newY !== player.y) {
+      if (moves === 0) startTimer(); // Start timer on first move
       player.x = newX;
       player.y = newY;
       visited[newX + ',' + newY] = true;
@@ -709,8 +710,11 @@
     visited = {}; visited['0,0'] = true;
     moves = 0; animating = false;
     moveCountEl.textContent = '0';
+    timerEl.textContent = '0:00';
+    elapsed = 0;
+    clearInterval(timerID);
+    timerID = null;
     gameActive = true;
-    startTimer();
     animFrame = requestAnimationFrame(drawMaze);
   }
 

@@ -389,10 +389,7 @@
     window.addEventListener(evt, onFirstInteraction, { once: false, passive: true });
   });
 
-  // ═══════════════════════════════════════════════════════
-  // MAZE GAME - recursive backtracking maze generator
-  // ═══════════════════════════════════════════════════════
-
+  // Maze game — recursive backtracking, smooth animation
   var mazeCanvas = document.getElementById('maze-canvas');
   var mazeCtx = mazeCanvas ? mazeCanvas.getContext('2d') : null;
   var moveCountEl = document.getElementById('move-count');
@@ -401,18 +398,22 @@
   var winMovesEl = document.getElementById('win-moves');
   var winTimeEl = document.getElementById('win-time');
 
-  var COLS = 15, ROWS = 15, CELL;
-  var grid = [], player = { x: 0, y: 0 }, moves = 0, timerID = null, elapsed = 0, gameActive = false;
+  var COLS = 10, ROWS = 10, CELL;
+  var grid = [], visited = {};
+  var player = { x: 0, y: 0, dx: 0, dy: 0, renderX: 0, renderY: 0, facing: 'right' };
+  var moves = 0, timerID = null, elapsed = 0, gameActive = false;
+  var animFrame = null, animating = false, gameTime = 0;
+  var confettiTimeout = null;
 
   function initMazeSize() {
-    var maxW = Math.min(window.innerWidth - 40, 520);
+    var maxW = Math.min(window.innerWidth - 40, 480);
     CELL = Math.floor(maxW / COLS);
-    if (CELL < 20) CELL = 20;
+    if (CELL < 28) CELL = 28;
+    if (CELL > 48) CELL = 48;
     mazeCanvas.width = COLS * CELL;
     mazeCanvas.height = ROWS * CELL;
   }
 
-  /* Generate maze using recursive backtracking */
   function generateMaze() {
     grid = [];
     for (var r = 0; r < ROWS; r++) {
@@ -421,23 +422,17 @@
         grid[r][c] = { top: true, right: true, bottom: true, left: true, visited: false };
       }
     }
-
-    var stack = [];
-    var current = { r: 0, c: 0 };
+    var stack = [], current = { r: 0, c: 0 };
     grid[0][0].visited = true;
     stack.push(current);
-
     while (stack.length > 0) {
-      var neighbours = [];
-      var cr = current.r, cc = current.c;
-      if (cr > 0 && !grid[cr - 1][cc].visited) neighbours.push({ r: cr - 1, c: cc, wall: 'top' });
-      if (cc < COLS - 1 && !grid[cr][cc + 1].visited) neighbours.push({ r: cr, c: cc + 1, wall: 'right' });
-      if (cr < ROWS - 1 && !grid[cr + 1][cc].visited) neighbours.push({ r: cr + 1, c: cc, wall: 'bottom' });
-      if (cc > 0 && !grid[cr][cc - 1].visited) neighbours.push({ r: cr, c: cc - 1, wall: 'left' });
-
+      var neighbours = [], cr = current.r, cc = current.c;
+      if (cr > 0 && !grid[cr-1][cc].visited) neighbours.push({ r: cr-1, c: cc, wall: 'top' });
+      if (cc < COLS-1 && !grid[cr][cc+1].visited) neighbours.push({ r: cr, c: cc+1, wall: 'right' });
+      if (cr < ROWS-1 && !grid[cr+1][cc].visited) neighbours.push({ r: cr+1, c: cc, wall: 'bottom' });
+      if (cc > 0 && !grid[cr][cc-1].visited) neighbours.push({ r: cr, c: cc-1, wall: 'left' });
       if (neighbours.length > 0) {
         var next = neighbours[Math.floor(Math.random() * neighbours.length)];
-        // Remove walls between current and next
         if (next.wall === 'top')    { grid[cr][cc].top = false; grid[next.r][next.c].bottom = false; }
         if (next.wall === 'right')  { grid[cr][cc].right = false; grid[next.r][next.c].left = false; }
         if (next.wall === 'bottom') { grid[cr][cc].bottom = false; grid[next.r][next.c].top = false; }
@@ -451,25 +446,58 @@
     }
   }
 
-  function drawMaze() {
+  function drawMaze(timestamp) {
     if (!mazeCtx) return;
+    gameTime = timestamp || 0;
     var ctx = mazeCtx;
     var W = mazeCanvas.width, H = mazeCanvas.height;
     ctx.clearRect(0, 0, W, H);
 
-    // Background
-    ctx.fillStyle = '#0a0812';
+    // Dark background
+    ctx.fillStyle = '#080614';
     ctx.fillRect(0, 0, W, H);
 
-    // Draw walls
-    ctx.strokeStyle = 'rgba(139,92,246,.4)';
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
+    // Subtle grid dots
+    ctx.fillStyle = 'rgba(139,92,246,.06)';
+    for (var r = 0; r <= ROWS; r++) {
+      for (var c = 0; c <= COLS; c++) {
+        ctx.beginPath();
+        ctx.arc(c * CELL, r * CELL, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
 
+    // Visited cells trail
+    for (var key in visited) {
+      var parts = key.split(',');
+      var vc = parseInt(parts[0]), vr = parseInt(parts[1]);
+      ctx.fillStyle = 'rgba(139,92,246,.06)';
+      ctx.fillRect(vc * CELL + 2, vr * CELL + 2, CELL - 4, CELL - 4);
+    }
+
+    // Radial light around player
+    var px = player.renderX * CELL + CELL / 2;
+    var py = player.renderY * CELL + CELL / 2;
+    var lightRadius = CELL * 3.5;
+    var grad = ctx.createRadialGradient(px, py, 0, px, py, lightRadius);
+    grad.addColorStop(0, 'rgba(139,92,246,.12)');
+    grad.addColorStop(0.5, 'rgba(139,92,246,.04)');
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Walls
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 2.5;
     for (var r = 0; r < ROWS; r++) {
       for (var c = 0; c < COLS; c++) {
         var x = c * CELL, y = r * CELL;
         var cell = grid[r][c];
+        // Walls closer to player are brighter
+        var d = Math.sqrt(Math.pow(c - player.renderX, 2) + Math.pow(r - player.renderY, 2));
+        var brightness = Math.max(0.15, Math.min(0.7, 1 - d / 8));
+        ctx.strokeStyle = 'rgba(139,92,246,' + brightness + ')';
+
         if (cell.top)    { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + CELL, y); ctx.stroke(); }
         if (cell.right)  { ctx.beginPath(); ctx.moveTo(x + CELL, y); ctx.lineTo(x + CELL, y + CELL); ctx.stroke(); }
         if (cell.bottom) { ctx.beginPath(); ctx.moveTo(x, y + CELL); ctx.lineTo(x + CELL, y + CELL); ctx.stroke(); }
@@ -477,52 +505,184 @@
       }
     }
 
-    // Exit marker
+    // Exit portal — animated pulsing ring
     var ex = (COLS - 1) * CELL + CELL / 2, ey = (ROWS - 1) * CELL + CELL / 2;
+    var pulse = Math.sin(gameTime * 0.004) * 0.15 + 0.85;
+    // Outer glow
+    var exitGrad = ctx.createRadialGradient(ex, ey, 0, ex, ey, CELL * 0.45);
+    exitGrad.addColorStop(0, 'rgba(163,230,53,.25)');
+    exitGrad.addColorStop(1, 'transparent');
+    ctx.fillStyle = exitGrad;
+    ctx.fillRect(ex - CELL * 0.5, ey - CELL * 0.5, CELL, CELL);
+    // Ring
     ctx.beginPath();
-    ctx.arc(ex, ey, CELL * 0.25, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(163,230,53,.3)';
-    ctx.fill();
+    ctx.arc(ex, ey, CELL * 0.28 * pulse, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(163,230,53,.6)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    // Inner dot
     ctx.beginPath();
-    ctx.arc(ex, ey, CELL * 0.15, 0, Math.PI * 2);
+    ctx.arc(ex, ey, CELL * 0.1, 0, Math.PI * 2);
     ctx.fillStyle = '#a3e635';
     ctx.fill();
+    // Star sparkles around exit
+    for (var s = 0; s < 4; s++) {
+      var sa = (gameTime * 0.002 + s * Math.PI / 2) % (Math.PI * 2);
+      var sr = CELL * 0.35;
+      var sparkX = ex + Math.cos(sa) * sr;
+      var sparkY = ey + Math.sin(sa) * sr;
+      ctx.beginPath();
+      ctx.arc(sparkX, sparkY, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(190,242,100,.6)';
+      ctx.fill();
+    }
 
-    // Player
-    var px = player.x * CELL + CELL / 2, py = player.y * CELL + CELL / 2;
-    // Glow
+    // Player character — animated blob with face
+    var bounce = Math.sin(gameTime * 0.006) * 2;
+    var squish = animating ? 0.85 : 1;
+    var squishY = animating ? 1.15 : 1;
+    var bodyR = CELL * 0.28;
+
+    // Player shadow
     ctx.beginPath();
-    ctx.arc(px, py, CELL * 0.35, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(139,92,246,.25)';
+    ctx.ellipse(px, py + bodyR + 3, bodyR * 0.7, 3, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,0,0,.3)';
     ctx.fill();
+
+    // Player outer glow (pulsing)
+    var glowPulse = Math.sin(gameTime * 0.005) * 0.08 + 0.2;
+    ctx.beginPath();
+    ctx.arc(px, py + bounce, bodyR * 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(167,139,250,' + glowPulse + ')';
+    ctx.fill();
+
     // Body
+    ctx.save();
+    ctx.translate(px, py + bounce);
+    ctx.scale(squish, squishY);
+    // Main body gradient
+    var bodyGrad = ctx.createRadialGradient(-bodyR * 0.3, -bodyR * 0.3, 0, 0, 0, bodyR);
+    bodyGrad.addColorStop(0, '#c4b5fd');
+    bodyGrad.addColorStop(0.5, '#a78bfa');
+    bodyGrad.addColorStop(1, '#7c3aed');
     ctx.beginPath();
-    ctx.arc(px, py, CELL * 0.22, 0, Math.PI * 2);
-    ctx.fillStyle = '#a78bfa';
+    ctx.arc(0, 0, bodyR, 0, Math.PI * 2);
+    ctx.fillStyle = bodyGrad;
     ctx.fill();
-    ctx.shadowBlur = 0;
+
+    // Highlight (makes it look 3D/shiny)
+    ctx.beginPath();
+    ctx.arc(-bodyR * 0.2, -bodyR * 0.25, bodyR * 0.35, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,255,255,.2)';
+    ctx.fill();
+
+    // Eyes
+    var eyeOffX = 0;
+    var eyeOffY = 0;
+    if (player.facing === 'left') eyeOffX = -2;
+    if (player.facing === 'right') eyeOffX = 2;
+    if (player.facing === 'up') eyeOffY = -2;
+    if (player.facing === 'down') eyeOffY = 2;
+
+    var eyeSpacing = bodyR * 0.38;
+    // Left eye white
+    ctx.beginPath();
+    ctx.ellipse(-eyeSpacing + eyeOffX, -bodyR * 0.1 + eyeOffY, bodyR * 0.18, bodyR * 0.22, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+    // Left pupil
+    ctx.beginPath();
+    ctx.arc(-eyeSpacing + eyeOffX * 1.5, -bodyR * 0.08 + eyeOffY * 1.3, bodyR * 0.09, 0, Math.PI * 2);
+    ctx.fillStyle = '#1e1a38';
+    ctx.fill();
+    // Left pupil shine
+    ctx.beginPath();
+    ctx.arc(-eyeSpacing + eyeOffX * 1.5 - 1, -bodyR * 0.12 + eyeOffY * 1.3, bodyR * 0.035, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+
+    // Right eye white
+    ctx.beginPath();
+    ctx.ellipse(eyeSpacing + eyeOffX, -bodyR * 0.1 + eyeOffY, bodyR * 0.18, bodyR * 0.22, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+    // Right pupil
+    ctx.beginPath();
+    ctx.arc(eyeSpacing + eyeOffX * 1.5, -bodyR * 0.08 + eyeOffY * 1.3, bodyR * 0.09, 0, Math.PI * 2);
+    ctx.fillStyle = '#1e1a38';
+    ctx.fill();
+    // Right pupil shine
+    ctx.beginPath();
+    ctx.arc(eyeSpacing + eyeOffX * 1.5 - 1, -bodyR * 0.12 + eyeOffY * 1.3, bodyR * 0.035, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+
+    // Small smile
+    ctx.beginPath();
+    ctx.arc(0 + eyeOffX * 0.5, bodyR * 0.15 + eyeOffY * 0.5, bodyR * 0.2, 0.1 * Math.PI, 0.9 * Math.PI, false);
+    ctx.strokeStyle = '#1e1a38';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.restore();
+
+    // Keep the render loop going for animations
+    if (gameActive) {
+      animFrame = requestAnimationFrame(drawMaze);
+    }
+  }
+
+  // Smooth lerp movement
+  function lerpTo(targetX, targetY, dir) {
+    if (animating) return;
+    animating = true;
+    player.facing = dir;
+    var startX = player.renderX, startY = player.renderY;
+    var duration = 100; // ms
+    var startTime = performance.now();
+
+    function step(now) {
+      var t = Math.min((now - startTime) / duration, 1);
+      // Ease out cubic
+      t = 1 - Math.pow(1 - t, 3);
+      player.renderX = startX + (targetX - startX) * t;
+      player.renderY = startY + (targetY - startY) * t;
+      if (t < 1) {
+        requestAnimationFrame(step);
+      } else {
+        player.renderX = targetX;
+        player.renderY = targetY;
+        animating = false;
+      }
+    }
+    requestAnimationFrame(step);
   }
 
   function movePlayer(dir) {
-    if (!gameActive) return;
+    if (!gameActive || animating) return;
     var c = grid[player.y][player.x];
-    var moved = false;
-    if (dir === 'up' && !c.top && player.y > 0) { player.y--; moved = true; }
-    if (dir === 'down' && !c.bottom && player.y < ROWS - 1) { player.y++; moved = true; }
-    if (dir === 'left' && !c.left && player.x > 0) { player.x--; moved = true; }
-    if (dir === 'right' && !c.right && player.x < COLS - 1) { player.x++; moved = true; }
+    var newX = player.x, newY = player.y;
+    if (dir === 'up' && !c.top && player.y > 0) newY--;
+    if (dir === 'down' && !c.bottom && player.y < ROWS - 1) newY++;
+    if (dir === 'left' && !c.left && player.x > 0) newX--;
+    if (dir === 'right' && !c.right && player.x < COLS - 1) newX++;
 
-    if (moved) {
+    if (newX !== player.x || newY !== player.y) {
+      player.x = newX;
+      player.y = newY;
+      visited[newX + ',' + newY] = true;
       moves++;
       moveCountEl.textContent = moves;
-      drawMaze();
+      lerpTo(newX, newY, dir);
 
-      // Check win
       if (player.x === COLS - 1 && player.y === ROWS - 1) {
         gameActive = false;
         clearInterval(timerID);
-        setTimeout(showWin, 300);
+        setTimeout(showWin, 400);
       }
+    } else {
+      // Bump animation — face the direction even if blocked
+      player.facing = dir;
     }
   }
 
@@ -543,14 +703,19 @@
   }
 
   function newGame() {
+    if (animFrame) cancelAnimationFrame(animFrame);
+    if (confettiTimeout) clearTimeout(confettiTimeout);
     initMazeSize();
     generateMaze();
-    player = { x: 0, y: 0 };
-    moves = 0;
+    player.x = 0; player.y = 0;
+    player.renderX = 0; player.renderY = 0;
+    player.facing = 'right';
+    visited = {}; visited['0,0'] = true;
+    moves = 0; animating = false;
     moveCountEl.textContent = '0';
     gameActive = true;
     startTimer();
-    drawMaze();
+    animFrame = requestAnimationFrame(drawMaze);
   }
 
   function showWin() {
@@ -560,7 +725,7 @@
     fireConfetti();
   }
 
-  /* Confetti particles */
+  // Lightweight confetti with auto-cleanup
   function fireConfetti() {
     var cc = document.getElementById('confetti-canvas');
     if (!cc) return;
@@ -568,34 +733,37 @@
     cc.width = window.innerWidth;
     cc.height = window.innerHeight;
     var particles = [];
-    var colors = ['#8b5cf6', '#a3e635', '#22d3ee', '#f472b6', '#fb923c', '#a78bfa', '#bef264'];
+    var colors = ['#8b5cf6', '#a3e635', '#22d3ee', '#f472b6', '#fb923c', '#bef264'];
+    var running = true;
 
-    for (var i = 0; i < 120; i++) {
+    for (var i = 0; i < 50; i++) {
       particles.push({
-        x: cc.width / 2 + (Math.random() - 0.5) * 200,
+        x: cc.width / 2 + (Math.random() - 0.5) * 160,
         y: cc.height / 2,
-        vx: (Math.random() - 0.5) * 16,
-        vy: Math.random() * -14 - 4,
-        w: Math.random() * 8 + 4,
-        h: Math.random() * 6 + 3,
+        vx: (Math.random() - 0.5) * 12,
+        vy: Math.random() * -11 - 3,
+        w: Math.random() * 7 + 3,
+        h: Math.random() * 5 + 2,
         color: colors[Math.floor(Math.random() * colors.length)],
         rot: Math.random() * 360,
-        rv: (Math.random() - 0.5) * 12,
+        rv: (Math.random() - 0.5) * 10,
         life: 1
       });
     }
 
     function draw() {
+      if (!running) { ctx.clearRect(0, 0, cc.width, cc.height); return; }
       ctx.clearRect(0, 0, cc.width, cc.height);
       var alive = false;
-      particles.forEach(function (p) {
-        if (p.life <= 0) return;
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        if (p.life <= 0) continue;
         alive = true;
-        p.vy += 0.3;
+        p.vy += 0.25;
         p.x += p.vx;
         p.y += p.vy;
         p.rot += p.rv;
-        p.life -= 0.008;
+        p.life -= 0.015;
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rot * Math.PI / 180);
@@ -603,18 +771,23 @@
         ctx.fillStyle = p.color;
         ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
         ctx.restore();
-      });
+      }
       if (alive) requestAnimationFrame(draw);
     }
     draw();
+
+    // Auto-stop after 3 seconds to prevent frame drops
+    confettiTimeout = setTimeout(function () {
+      running = false;
+      ctx.clearRect(0, 0, cc.width, cc.height);
+    }, 3000);
   }
 
-  // Wire up maze controls
   if (mazeCanvas) {
     newGame();
     window.addEventListener('resize', function () {
       initMazeSize();
-      drawMaze();
+      if (gameActive) drawMaze();
     }, { passive: true });
 
     document.getElementById('new-maze-btn').addEventListener('click', function () {
@@ -626,33 +799,29 @@
       newGame();
     });
 
-    // Keyboard controls
+    // Keyboard
     document.addEventListener('keydown', function (e) {
       if (document.getElementById('terminal-overlay').classList.contains('show')) return;
       var dirMap = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right', w: 'up', a: 'left', s: 'down', d: 'right', W: 'up', A: 'left', S: 'down', D: 'right' };
       if (dirMap[e.key]) { e.preventDefault(); movePlayer(dirMap[e.key]); }
     });
 
-    // D-pad buttons
+    // D-pad
     document.querySelectorAll('.dpad-btn').forEach(function (btn) {
       btn.addEventListener('click', function () { movePlayer(btn.dataset.dir); });
     });
 
-    // Swipe controls
+    // Swipe
     var sx = 0, sy = 0;
     mazeCanvas.addEventListener('touchstart', function (e) {
-      sx = e.touches[0].clientX;
-      sy = e.touches[0].clientY;
+      sx = e.touches[0].clientX; sy = e.touches[0].clientY;
     }, { passive: true });
     mazeCanvas.addEventListener('touchend', function (e) {
       var dx = e.changedTouches[0].clientX - sx;
       var dy = e.changedTouches[0].clientY - sy;
       if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return;
-      if (Math.abs(dx) > Math.abs(dy)) {
-        movePlayer(dx > 0 ? 'right' : 'left');
-      } else {
-        movePlayer(dy > 0 ? 'down' : 'up');
-      }
+      if (Math.abs(dx) > Math.abs(dy)) { movePlayer(dx > 0 ? 'right' : 'left'); }
+      else { movePlayer(dy > 0 ? 'down' : 'up'); }
     }, { passive: true });
   }
 

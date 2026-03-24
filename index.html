@@ -44,6 +44,7 @@
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
+    <a href="#playground">Play</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
   </div>
@@ -56,6 +57,7 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#playground">Play</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -450,6 +452,53 @@
     </div>
   </section>
 
+  <!-- PLAYGROUND -->
+  <section id="playground">
+    <p class="sec-tag reveal">Interactive</p>
+    <h2 class="sec-h reveal">Neural <span class="g">Labyrinth</span></h2>
+    <p class="game-intro reveal">I built my capstone around teaching programming through games. Here's a taste &mdash; navigate the maze to the exit. Arrow keys, WASD, or swipe on mobile.</p>
+    <div class="game-container reveal">
+      <div class="game-hud">
+        <div class="hud-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+          <span id="move-count">0</span> moves
+        </div>
+        <div class="hud-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="maze-timer">0:00</span>
+        </div>
+        <button class="maze-btn" id="new-maze-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          New Maze
+        </button>
+      </div>
+      <canvas id="maze-canvas"></canvas>
+      <div class="game-dpad" id="game-dpad">
+        <button class="dpad-btn dpad-up" data-dir="up" aria-label="Move up">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+        <button class="dpad-btn dpad-left" data-dir="left" aria-label="Move left">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="dpad-btn dpad-right" data-dir="right" aria-label="Move right">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <button class="dpad-btn dpad-down" data-dir="down" aria-label="Move down">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="maze-win-overlay" id="maze-win">
+      <canvas id="confetti-canvas"></canvas>
+      <div class="maze-win-card">
+        <div class="win-icon">🎉</div>
+        <h3>You escaped!</h3>
+        <p><span id="win-moves">0</span> moves in <span id="win-time">0:00</span></p>
+        <button class="maze-btn maze-btn-lg" id="play-again-btn">Play Again</button>
+      </div>
+    </div>
+  </section>
+
   <!-- EDUCATION -->
   <section id="education">
     <p class="sec-tag reveal">Background</p>
@@ -530,6 +579,29 @@
       </div>
     </div>
   </section>
+
+  <!-- Terminal overlay -->
+  <div class="terminal-overlay" id="terminal-overlay">
+    <div class="terminal-window" id="terminal-window">
+      <div class="terminal-bar" id="terminal-bar">
+        <div class="terminal-dots">
+          <span class="tdot tdot-red" id="terminal-close"></span>
+          <span class="tdot tdot-yellow"></span>
+          <span class="tdot tdot-green"></span>
+        </div>
+        <span class="terminal-title">jeof@portfolio</span>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="terminal-output" id="terminal-output">
+          <div class="term-line">Welcome to Jeof's terminal. Type <span class="term-cmd">help</span> for commands.</div>
+        </div>
+        <div class="terminal-input-row">
+          <span class="term-prompt">jeof@portfolio:~$</span>
+          <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false" autofocus />
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <span class="ftxt">&copy; 2026 Jeof Yciar T. Sison</span>

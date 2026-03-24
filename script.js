@@ -537,11 +537,11 @@
       ctx.fill();
     }
 
-    // Player character — animated blob with face
+    // Player character — animated star with face
     var bounce = Math.sin(gameTime * 0.006) * 2;
     var squish = animating ? 0.85 : 1;
     var squishY = animating ? 1.15 : 1;
-    var bodyR = CELL * 0.28;
+    var bodyR = CELL * 0.32;
 
     // Player shadow
     ctx.beginPath();
@@ -552,76 +552,72 @@
     // Player outer glow (pulsing)
     var glowPulse = Math.sin(gameTime * 0.005) * 0.08 + 0.2;
     ctx.beginPath();
-    ctx.arc(px, py + bounce, bodyR * 1.5, 0, Math.PI * 2);
+    ctx.arc(px, py + bounce, bodyR * 1.4, 0, Math.PI * 2);
     ctx.fillStyle = 'rgba(167,139,250,' + glowPulse + ')';
     ctx.fill();
 
-    // Body
+    // Body (Star Shape)
     ctx.save();
     ctx.translate(px, py + bounce);
     ctx.scale(squish, squishY);
-    // Main body gradient
-    var bodyGrad = ctx.createRadialGradient(-bodyR * 0.3, -bodyR * 0.3, 0, 0, 0, bodyR);
-    bodyGrad.addColorStop(0, '#c4b5fd');
-    bodyGrad.addColorStop(0.5, '#a78bfa');
-    bodyGrad.addColorStop(1, '#7c3aed');
-    ctx.beginPath();
-    ctx.arc(0, 0, bodyR, 0, Math.PI * 2);
-    ctx.fillStyle = bodyGrad;
+
+    function drawStarPath(cx, cy, spikes, outerRadius, innerRadius) {
+      var rot = Math.PI / 2 * 3;
+      var x = cx, y = cy, step = Math.PI / spikes;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - outerRadius);
+      for (var i = 0; i < spikes; i++) {
+        x = cx + Math.cos(rot) * outerRadius;
+        y = cy + Math.sin(rot) * outerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
+        x = cx + Math.cos(rot) * innerRadius;
+        y = cy + Math.sin(rot) * innerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
+      }
+      ctx.lineTo(cx, cy - outerRadius);
+      ctx.closePath();
+    }
+
+    // Main star gradient
+    var starGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, bodyR);
+    starGrad.addColorStop(0, '#ddd6fe');
+    starGrad.addColorStop(0.4, '#a78bfa');
+    starGrad.addColorStop(1, '#7c3aed');
+    
+    drawStarPath(0, 0, 5, bodyR, bodyR * 0.45);
+    ctx.fillStyle = starGrad;
     ctx.fill();
 
-    // Highlight (makes it look 3D/shiny)
-    ctx.beginPath();
-    ctx.arc(-bodyR * 0.2, -bodyR * 0.25, bodyR * 0.35, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255,255,255,.2)';
-    ctx.fill();
+    // Subtle edge highlight
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
 
     // Eyes
-    var eyeOffX = 0;
-    var eyeOffY = 0;
+    var eyeOffX = 0, eyeOffY = 0;
     if (player.facing === 'left') eyeOffX = -2;
     if (player.facing === 'right') eyeOffX = 2;
     if (player.facing === 'up') eyeOffY = -2;
     if (player.facing === 'down') eyeOffY = 2;
 
-    var eyeSpacing = bodyR * 0.38;
-    // Left eye white
-    ctx.beginPath();
-    ctx.ellipse(-eyeSpacing + eyeOffX, -bodyR * 0.1 + eyeOffY, bodyR * 0.18, bodyR * 0.22, 0, 0, Math.PI * 2);
-    ctx.fillStyle = '#fff';
-    ctx.fill();
-    // Left pupil
-    ctx.beginPath();
-    ctx.arc(-eyeSpacing + eyeOffX * 1.5, -bodyR * 0.08 + eyeOffY * 1.3, bodyR * 0.09, 0, Math.PI * 2);
+    var eyeSpacing = bodyR * 0.25;
+    // Eyes
     ctx.fillStyle = '#1e1a38';
-    ctx.fill();
-    // Left pupil shine
-    ctx.beginPath();
-    ctx.arc(-eyeSpacing + eyeOffX * 1.5 - 1, -bodyR * 0.12 + eyeOffY * 1.3, bodyR * 0.035, 0, Math.PI * 2);
+    ctx.beginPath(); ctx.arc(-eyeSpacing + eyeOffX, -bodyR * 0.05 + eyeOffY, bodyR * 0.1, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(eyeSpacing + eyeOffX, -bodyR * 0.05 + eyeOffY, bodyR * 0.1, 0, Math.PI * 2); ctx.fill();
+    
+    // Tiny white shine
     ctx.fillStyle = '#fff';
-    ctx.fill();
+    ctx.beginPath(); ctx.arc(-eyeSpacing + eyeOffX - 1, -bodyR * 0.07 + eyeOffY, bodyR * 0.04, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(eyeSpacing + eyeOffX - 1, -bodyR * 0.07 + eyeOffY, bodyR * 0.04, 0, Math.PI * 2); ctx.fill();
 
-    // Right eye white
+    // Smile
     ctx.beginPath();
-    ctx.ellipse(eyeSpacing + eyeOffX, -bodyR * 0.1 + eyeOffY, bodyR * 0.18, bodyR * 0.22, 0, 0, Math.PI * 2);
-    ctx.fillStyle = '#fff';
-    ctx.fill();
-    // Right pupil
-    ctx.beginPath();
-    ctx.arc(eyeSpacing + eyeOffX * 1.5, -bodyR * 0.08 + eyeOffY * 1.3, bodyR * 0.09, 0, Math.PI * 2);
-    ctx.fillStyle = '#1e1a38';
-    ctx.fill();
-    // Right pupil shine
-    ctx.beginPath();
-    ctx.arc(eyeSpacing + eyeOffX * 1.5 - 1, -bodyR * 0.12 + eyeOffY * 1.3, bodyR * 0.035, 0, Math.PI * 2);
-    ctx.fillStyle = '#fff';
-    ctx.fill();
-
-    // Small smile
-    ctx.beginPath();
-    ctx.arc(0 + eyeOffX * 0.5, bodyR * 0.15 + eyeOffY * 0.5, bodyR * 0.2, 0.1 * Math.PI, 0.9 * Math.PI, false);
+    ctx.arc(0 + eyeOffX * 0.5, bodyR * 0.1 + eyeOffY * 0.5, bodyR * 0.15, 0.1 * Math.PI, 0.9 * Math.PI, false);
     ctx.strokeStyle = '#1e1a38';
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 1.2;
     ctx.stroke();
 
     ctx.restore();

@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0a0812">
-  <meta name="description" content="Jeof Sison - IT Support Specialist, Service Desk Analyst, and Developer. BSIT Graduate with experience in troubleshooting, web development, and game development.">
+  <meta name="description"
+    content="Jeof Sison - IT Support Specialist, Service Desk Analyst, and Developer. BSIT Graduate with experience in troubleshooting, web development, and game development.">
   <meta name="author" content="Jeof Yciar T. Sison">
   <title>Jeof Sison - IT Support &amp; Developer</title>
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0812'/%3E%3Ctext x='50' y='68' font-family='system-ui' font-size='56' font-weight='900' fill='%238b5cf6' text-anchor='middle'%3EJ%3C/text%3E%3Ccircle cx='78' cy='72' r='6' fill='%23a3e635'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0812'/%3E%3Ctext x='50' y='68' font-family='system-ui' font-size='56' font-weight='900' fill='%238b5cf6' text-anchor='middle'%3EJ%3C/text%3E%3Ccircle cx='78' cy='72' r='6' fill='%23a3e635'/%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- Music Player -->
   <div class="music-player" id="music-player">
     <button class="music-btn" id="music-btn" aria-label="Toggle background music">
-      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+      </svg>
     </button>
     <div class="music-bars" id="music-bars">
       <span></span><span></span><span></span><span></span>
@@ -29,13 +39,16 @@
   </div>
   <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 
-  <!-- Custom cursor (desktop only) -->
+  <!-- Custom cursor -->
   <div class="cursor"></div>
   <div class="cursor-trail"></div>
 
   <!-- Back to top -->
   <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
   </button>
 
   <!-- Mobile menu -->
@@ -86,13 +99,31 @@
         </p>
         <div class="hero-ctas">
           <a href="#contact" class="btn-v">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
             Get In Touch
           </a>
           <a href="https://github.com/R41CY" target="_blank" rel="noopener" class="btn-o">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+            </svg>
             GitHub &mdash; R41CY
           </a>
+        </div>
+      </div>
+      <div class="hero-right reveal" aria-hidden="true">
+        <div class="hero-img-wrap tech-frame">
+          <div class="tech-grid"></div>
+          <div class="scan-line"></div>
+          <div class="corner-accents"></div>
+          <img src="https://lh3.googleusercontent.com/d/181cLRhLP4dQIJlhex1IRrPPoZgUUEC2M" alt="Jeof Sison"
+            class="hero-img">
+          <div class="img-glow tech"></div>
         </div>
       </div>
       <div class="hero-tags" aria-hidden="true">
@@ -101,11 +132,16 @@
         <div class="htag"><span class="ck">new</span> <span class="cp">Unity</span>.Game()</div>
         <div class="htag"><span class="cl">PHP</span> + SQL + <span class="cc">WebSockets</span></div>
         <div class="htag"><span class="cp">Firebase</span>.<span class="cl">deploy</span>("Veloci")</div>
-        <div class="htag">graduate <span class="cp">2025</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="htag">graduate <span class="cp">2025</span> <svg width="12" height="12" viewBox="0 0 24 24"
+            fill="none" stroke="var(--lime)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg></div>
       </div>
     </div>
     <div class="scroll-hint" aria-hidden="true">
-      <div class="smouse"><div class="swheel"></div></div>
+      <div class="smouse">
+        <div class="swheel"></div>
+      </div>
       <span class="slabel">Scroll</span>
     </div>
   </section>
@@ -116,9 +152,15 @@
     <h2 class="sec-h reveal">Who I <span class="g">Am</span></h2>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>I'm a <strong>Bachelor of Science in Information Technology graduate</strong> with hands-on experience in Service Desk and technical support environments. I help users resolve issues through <em>remote troubleshooting</em>, incident documentation, and structured ticket management.</p>
-        <p>Skilled in <strong>SCCM Remote Control, Quick Assist, Microsoft Remote Help</strong>, and Microsoft Teams &mdash; experienced verifying order and billing info using Kenan, CSP, Clarity, and Siebel.</p>
-        <p>I also co-developed an <strong>internal web ticketing system</strong> during my internship and served as <strong>Lead Game Developer</strong> for my capstone &mdash; reflecting genuine curiosity for both the operational and creative sides of technology.</p>
+        <p>I'm a <strong>Bachelor of Science in Information Technology graduate</strong> with hands-on experience in
+          Service Desk and technical support environments. I help users resolve issues through <em>remote
+            troubleshooting</em>, incident documentation, and structured ticket management.</p>
+        <p>Skilled in <strong>SCCM Remote Control, Quick Assist, Microsoft Remote Help</strong>, and Microsoft Teams
+          &mdash; experienced verifying order and billing info using Kenan, CSP, Clarity, and Siebel.</p>
+        <p>I also co-developed an <strong>internal web ticketing system</strong> during my internship and served as
+          <strong>Lead Game Developer</strong> for my capstone &mdash; reflecting genuine curiosity for both the
+          operational and creative sides of technology.
+        </p>
       </div>
       <div class="stat-grid">
         <div class="stat-box reveal">
@@ -148,7 +190,12 @@
     <div class="skill-grid">
       <div class="skill-card reveal">
         <span class="sc-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+            <line x1="8" y1="21" x2="16" y2="21" />
+            <line x1="12" y1="17" x2="12" y2="21" />
+          </svg>
         </span>
         <div class="sc-title">IT Support</div>
         <div class="tag-wrap">
@@ -163,7 +210,11 @@
       </div>
       <div class="skill-card reveal">
         <span class="sc-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
+          </svg>
         </span>
         <div class="sc-title">Tools &amp; Platforms</div>
         <div class="tag-wrap">
@@ -180,7 +231,12 @@
       </div>
       <div class="skill-card reveal">
         <span class="sc-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6" />
+            <polyline points="8 6 2 12 8 18" />
+            <line x1="14" y1="4" x2="10" y2="20" />
+          </svg>
         </span>
         <div class="sc-title">Development</div>
         <div class="tag-wrap">
@@ -207,29 +263,46 @@
     <div class="timeline">
 
       <div class="tl-row reveal">
-        <div class="tl-pip-col"><div class="tl-pip"></div></div>
+        <div class="tl-pip-col">
+          <div class="tl-pip"></div>
+        </div>
         <div class="exp-card">
           <div class="exp-hdr">
             <div>
               <div class="exp-role">Service Desk Support L1</div>
               <div class="exp-co">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
                 Unison Solutions Delivery, Inc. &middot; Client: AMDOCS / PLDT
               </div>
               <div class="exp-dt">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
                 July 8, 2025 &mdash; March 3, 2026
               </div>
             </div>
             <div class="exp-toggle" aria-label="Toggle details">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
             </div>
           </div>
           <div class="exp-body">
             <div class="exp-body-inner">
               <ul>
-                <li>Provided remote assistance for software installation, troubleshooting, password resets, and account unlocks.</li>
-                <li>Remotely accessed devices using SCCM Remote Control, Quick Assist, Remote Help, and Microsoft Teams.</li>
+                <li>Provided remote assistance for software installation, troubleshooting, password resets, and account
+                  unlocks.</li>
+                <li>Remotely accessed devices using SCCM Remote Control, Quick Assist, Remote Help, and Microsoft Teams.
+                </li>
                 <li>Documented troubleshooting steps and updates via ServiceNow ticketing system.</li>
                 <li>Performed initial troubleshooting and escalated incidents beyond L1 scope.</li>
                 <li>Verified order numbers and billing accounts before endorsing to proper support teams.</li>
@@ -241,22 +314,37 @@
       </div>
 
       <div class="tl-row reveal">
-        <div class="tl-pip-col"><div class="tl-pip"></div></div>
+        <div class="tl-pip-col">
+          <div class="tl-pip"></div>
+        </div>
         <div class="exp-card">
           <div class="exp-hdr">
             <div>
               <div class="exp-role">Technical Support</div>
               <div class="exp-co">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
                 Unison Solutions Delivery, Inc.
               </div>
               <div class="exp-dt">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
                 June 23, 2025 &mdash; July 8, 2025
               </div>
             </div>
             <div class="exp-toggle" aria-label="Toggle details">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
             </div>
           </div>
           <div class="exp-body">
@@ -272,28 +360,42 @@
       </div>
 
       <div class="tl-row reveal">
-        <div class="tl-pip-col"><div class="tl-pip"></div></div>
+        <div class="tl-pip-col">
+          <div class="tl-pip"></div>
+        </div>
         <div class="exp-card">
           <div class="exp-hdr">
             <div>
               <div class="exp-role">IT Intern</div>
               <div class="exp-co">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
                 Philippines First Insurance Company, Inc.
               </div>
               <div class="exp-dt">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
                 486 Hours Internship
               </div>
             </div>
             <div class="exp-toggle" aria-label="Toggle details">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
             </div>
           </div>
           <div class="exp-body">
             <div class="exp-body-inner">
               <ul>
-                <li>Co-developed a web-based internal ticketing system using PHP and SQL for managing service requests.</li>
+                <li>Co-developed a web-based internal ticketing system using PHP and SQL for managing service requests.
+                </li>
                 <li>Contributed to backend logic and database queries for ticket workflows.</li>
                 <li>Provided printer troubleshooting and PC diagnostics.</li>
                 <li>Deployed laptops including OS installation and software setup.</li>
@@ -315,29 +417,46 @@
       <div class="proj-card reveal">
         <div class="pcglow pcg1"></div>
         <div class="picon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2" />
+            <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+            <line x1="9" y1="12" x2="15" y2="12" />
+            <line x1="9" y1="16" x2="13" y2="16" />
+          </svg>
         </div>
         <div class="pname">Internal Ticketing System</div>
-        <p class="pdesc">A web-based service request platform for office environments &mdash; end-to-end ticket management with real-time updates and automated testing.</p>
+        <p class="pdesc">A web-based service request platform for office environments &mdash; end-to-end ticket
+          management with real-time updates and automated testing.</p>
         <div class="pfeats">
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Ticket creation &amp; management
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Admin dashboard
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Approval &amp; validation workflow
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Real-time WebSocket updates
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Automated testing (Cypress)
           </span>
         </div>
@@ -347,31 +466,50 @@
         </div>
         <a href="https://github.com/R41CY" target="_blank" rel="noopener" class="plink">
           View on GitHub
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
         </a>
       </div>
       <div class="proj-card reveal">
         <div class="pcglow pcg2"></div>
         <div class="picon picon-lime">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.54Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.54Z"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.54Z" />
+            <path
+              d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.54Z" />
+          </svg>
         </div>
         <div class="pname">Neural Labyrinth</div>
-        <p class="pdesc">Capstone game designed to teach programming concepts interactively through puzzle-based levels. Served as Lead Game Developer.</p>
+        <p class="pdesc">Capstone game designed to teach programming concepts interactively through puzzle-based levels.
+          Served as Lead Game Developer.</p>
         <div class="pfeats">
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Lead Game Developer
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Custom game mechanics
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Interactive learning features
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Gameplay logic implementation
           </span>
         </div>
@@ -383,25 +521,38 @@
       <div class="proj-card reveal">
         <div class="pcglow pcg3"></div>
         <div class="picon picon-orange">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23" />
+            <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+          </svg>
         </div>
         <div class="pname">Veloci</div>
-        <p class="pdesc">The all-in-one business tracker built for Filipino entrepreneurs &mdash; track income, expenses, and profit per recipe in real time.</p>
+        <p class="pdesc">The all-in-one business tracker built for Filipino entrepreneurs &mdash; track income,
+          expenses, and profit per recipe in real time.</p>
         <div class="pfeats">
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Live profit dashboard
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Recipe cost calculator
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Transaction tracking &amp; CSV export
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Daily reports &amp; analytics
           </span>
         </div>
@@ -411,46 +562,70 @@
         </div>
         <a href="https://budget-tracker-6f70e.web.app/" target="_blank" rel="noopener" class="plink">
           View Live App
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
         </a>
       </div>
 
       <div class="proj-card reveal">
         <div class="pcglow pcg4"></div>
         <div class="picon picon-pink">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+          </svg>
         </div>
         <div class="pname">Auto Portfolio Generator</div>
-        <p class="pdesc">A no-code tool that lets anyone create a professional portfolio website by filling out a form &mdash; ready to deploy on GitHub Pages and Cloudflare.</p>
+        <p class="pdesc">A no-code tool that lets anyone create a professional portfolio website by filling out a form
+          &mdash; ready to deploy on GitHub Pages and Cloudflare.</p>
         <div class="pfeats">
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Multi-step form wizard
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Live preview
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Google Drive media support
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             One-click static site export
           </span>
           <span class="pf">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Auto-deployment via Cloudflare
           </span>
         </div>
         <div class="pstack">
           <span class="ps">HTML</span><span class="ps">CSS</span>
-          <span class="ps">JavaScript</span><span class="ps">Firebase</span><span class="ps">Firestore</span><span class="ps">Cloudflare</span>
+          <span class="ps">JavaScript</span><span class="ps">Firebase</span><span class="ps">Firestore</span><span
+            class="ps">Cloudflare</span>
         </div>
         <a href="https://auto-portfolio-a046e.web.app/" target="_blank" rel="noopener" class="plink">
           View Live App
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
         </a>
       </div>
     </div>
@@ -460,35 +635,56 @@
   <section id="playground">
     <p class="sec-tag reveal">Interactive</p>
     <h2 class="sec-h reveal">Neural <span class="g">Labyrinth</span></h2>
-    <p class="game-intro reveal">I built my capstone around teaching programming through games. Here's a taste &mdash; navigate the maze to the exit. Arrow keys, WASD, or swipe on mobile.</p>
+    <p class="game-intro reveal">I built my capstone around teaching programming through games. Here's a taste &mdash;
+      navigate the maze to the exit. Arrow keys, WASD, or swipe on mobile.</p>
     <div class="game-container reveal">
       <div class="game-hud">
         <div class="hud-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="13 17 18 12 13 7" />
+            <polyline points="6 17 11 12 6 7" />
+          </svg>
           <span id="move-count">0</span> moves
         </div>
         <div class="hud-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
           <span id="maze-timer">0:00</span>
         </div>
         <button class="maze-btn" id="new-maze-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10" />
+            <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" />
+          </svg>
           New Maze
         </button>
       </div>
       <canvas id="maze-canvas"></canvas>
       <div class="game-dpad" id="game-dpad">
         <button class="dpad-btn dpad-up" data-dir="up" aria-label="Move up">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
         </button>
         <button class="dpad-btn dpad-left" data-dir="left" aria-label="Move left">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
         </button>
         <button class="dpad-btn dpad-right" data-dir="right" aria-label="Move right">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
         </button>
         <button class="dpad-btn dpad-down" data-dir="down" aria-label="Move down">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </button>
       </div>
     </div>
@@ -510,42 +706,69 @@
     <div class="edu-wrap">
       <div class="edu-box reveal">
         <span class="edu-icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+            <path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5" />
+          </svg>
         </span>
         <div class="edu-deg">Bachelor of Science in Information Technology</div>
         <div class="edu-school">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
           STI College Sta. Mesa
         </div>
         <div class="edu-yr">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
           2021 &ndash; 2025
         </div>
       </div>
       <div class="cert-box reveal">
         <div class="cert-hed">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--v2)" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="7" />
+            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+          </svg>
           Certifications
         </div>
         <div class="cert-list">
           <div class="cert-row">
             <div class="cert-l">
               <div class="cpip"></div>
-              <div><div class="cnm">SAP Business One (SAP Advance)</div><div class="corg">FIT Academy</div></div>
+              <div>
+                <div class="cnm">SAP Business One (SAP Advance)</div>
+                <div class="corg">FIT Academy</div>
+              </div>
             </div>
             <div class="cyr">2024</div>
           </div>
           <div class="cert-row">
             <div class="cert-l">
               <div class="cpip"></div>
-              <div><div class="cnm">Java Foundation</div><div class="corg">Oracle Academy</div></div>
+              <div>
+                <div class="cnm">Java Foundation</div>
+                <div class="corg">Oracle Academy</div>
+              </div>
             </div>
             <div class="cyr">2022</div>
           </div>
           <div class="cert-row">
             <div class="cert-l">
               <div class="cpip"></div>
-              <div><div class="cnm">System Administration</div><div class="corg">Oracle Academy</div></div>
+              <div>
+                <div class="cnm">System Administration</div>
+                <div class="corg">Oracle Academy</div>
+              </div>
             </div>
             <div class="cyr">2022</div>
           </div>
@@ -559,7 +782,10 @@
     <div class="contact-glow" aria-hidden="true"></div>
     <div class="contact-inner reveal">
       <p class="contact-pre">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+        </svg>
         Say hello
       </p>
       <h2 class="contact-h">Let's work<br><span class="ghost">together.</span></h2>
@@ -568,16 +794,28 @@
         Always learning, improving, and building better systems.
       </p>
       <div class="contact-links">
-        <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#101;&#111;&#102;&#115;&#105;&#115;&#111;&#110;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;" class="clink clink-em">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#101;&#111;&#102;&#115;&#105;&#115;&#111;&#110;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;"
+          class="clink clink-em">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
           jeofsison9&#64;gmail.com
         </a>
         <a href="https://github.com/R41CY" target="_blank" rel="noopener" class="clink clink-gh">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+          </svg>
           github.com/R41CY
         </a>
         <a href="https://facebook.com/raicy.gov" target="_blank" rel="noopener" class="clink clink-fb">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+          </svg>
           raicy.gov
         </a>
       </div>
@@ -601,7 +839,8 @@
         </div>
         <div class="terminal-input-row">
           <span class="term-prompt">jeof@portfolio:~$</span>
-          <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false" autofocus />
+          <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" spellcheck="false"
+            autofocus />
         </div>
       </div>
     </div>
@@ -609,9 +848,12 @@
 
   <footer>
     <span class="ftxt">&copy; 2026 Jeof Yciar T. Sison</span>
-    <div class="fstatus"><div class="fpip"></div> Open to work</div>
+    <div class="fstatus">
+      <div class="fpip"></div> Open to work
+    </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
+
 </html>

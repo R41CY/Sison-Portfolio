@@ -370,7 +370,7 @@
   /* Base Audio Object Context Handler */
   var audio = document.getElementById('bg-music');
   var musicBtn = document.getElementById('music-btn');
-  audio.volume = 0.015;
+  audio.volume = 0.005;
 
   function setPlaying(on) { musicPanel.classList.toggle('playing', on); }
   function playMusic() { audio.play().then(function () { setPlaying(true); }).catch(function () { setPlaying(false); }); }
@@ -383,7 +383,7 @@
   var started = false;
   function onFirstInteraction() {
     if (started) return;
-    audio.play().then(function () { started = true; setPlaying(true); }).catch(function () {});
+    audio.play().then(function () { started = true; setPlaying(true); }).catch(function () { });
   }
   ['click', 'scroll', 'keydown', 'touchstart'].forEach(function (evt) {
     window.addEventListener(evt, onFirstInteraction, { once: false, passive: true });
@@ -427,16 +427,16 @@
     stack.push(current);
     while (stack.length > 0) {
       var neighbours = [], cr = current.r, cc = current.c;
-      if (cr > 0 && !grid[cr-1][cc].visited) neighbours.push({ r: cr-1, c: cc, wall: 'top' });
-      if (cc < COLS-1 && !grid[cr][cc+1].visited) neighbours.push({ r: cr, c: cc+1, wall: 'right' });
-      if (cr < ROWS-1 && !grid[cr+1][cc].visited) neighbours.push({ r: cr+1, c: cc, wall: 'bottom' });
-      if (cc > 0 && !grid[cr][cc-1].visited) neighbours.push({ r: cr, c: cc-1, wall: 'left' });
+      if (cr > 0 && !grid[cr - 1][cc].visited) neighbours.push({ r: cr - 1, c: cc, wall: 'top' });
+      if (cc < COLS - 1 && !grid[cr][cc + 1].visited) neighbours.push({ r: cr, c: cc + 1, wall: 'right' });
+      if (cr < ROWS - 1 && !grid[cr + 1][cc].visited) neighbours.push({ r: cr + 1, c: cc, wall: 'bottom' });
+      if (cc > 0 && !grid[cr][cc - 1].visited) neighbours.push({ r: cr, c: cc - 1, wall: 'left' });
       if (neighbours.length > 0) {
         var next = neighbours[Math.floor(Math.random() * neighbours.length)];
-        if (next.wall === 'top')    { grid[cr][cc].top = false; grid[next.r][next.c].bottom = false; }
-        if (next.wall === 'right')  { grid[cr][cc].right = false; grid[next.r][next.c].left = false; }
+        if (next.wall === 'top') { grid[cr][cc].top = false; grid[next.r][next.c].bottom = false; }
+        if (next.wall === 'right') { grid[cr][cc].right = false; grid[next.r][next.c].left = false; }
         if (next.wall === 'bottom') { grid[cr][cc].bottom = false; grid[next.r][next.c].top = false; }
-        if (next.wall === 'left')   { grid[cr][cc].left = false; grid[next.r][next.c].right = false; }
+        if (next.wall === 'left') { grid[cr][cc].left = false; grid[next.r][next.c].right = false; }
         grid[next.r][next.c].visited = true;
         stack.push(current);
         current = next;
@@ -498,10 +498,10 @@
         var brightness = Math.max(0.15, Math.min(0.7, 1 - d / 8));
         ctx.strokeStyle = 'rgba(249,115,22,' + brightness + ')';
 
-        if (cell.top)    { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + CELL, y); ctx.stroke(); }
-        if (cell.right)  { ctx.beginPath(); ctx.moveTo(x + CELL, y); ctx.lineTo(x + CELL, y + CELL); ctx.stroke(); }
+        if (cell.top) { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + CELL, y); ctx.stroke(); }
+        if (cell.right) { ctx.beginPath(); ctx.moveTo(x + CELL, y); ctx.lineTo(x + CELL, y + CELL); ctx.stroke(); }
         if (cell.bottom) { ctx.beginPath(); ctx.moveTo(x, y + CELL); ctx.lineTo(x + CELL, y + CELL); ctx.stroke(); }
-        if (cell.left)   { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + CELL); ctx.stroke(); }
+        if (cell.left) { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + CELL); ctx.stroke(); }
       }
     }
 
@@ -584,7 +584,7 @@
     starGrad.addColorStop(0, '#ffedd5');
     starGrad.addColorStop(0.4, '#fb923c');
     starGrad.addColorStop(1, '#ea580c');
-    
+
     // Constraints Parameters: Outer against Inner Radii Bounds
     drawStarPath(0, 0, 5, bodyR, bodyR * 0.4);
     ctx.fillStyle = starGrad;
@@ -607,7 +607,7 @@
     ctx.fillStyle = '#3f3f46';
     ctx.beginPath(); ctx.arc(-eyeSpacing + eyeOffX, -bodyR * 0.05 + eyeOffY, bodyR * 0.1, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.arc(eyeSpacing + eyeOffX, -bodyR * 0.05 + eyeOffY, bodyR * 0.1, 0, Math.PI * 2); ctx.fill();
-    
+
     // Secondary Rendering: Eye Focal Shine
     ctx.fillStyle = '#fff';
     ctx.beginPath(); ctx.arc(-eyeSpacing + eyeOffX - 1, -bodyR * 0.07 + eyeOffY, bodyR * 0.04, 0, Math.PI * 2); ctx.fill();

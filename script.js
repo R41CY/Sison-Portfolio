@@ -370,7 +370,7 @@
   /* Base Audio Object Context Handler */
   var audio = document.getElementById('bg-music');
   var musicBtn = document.getElementById('music-btn');
-  audio.volume = 0.05;
+  audio.volume = 0.015;
 
   function setPlaying(on) { musicPanel.classList.toggle('playing', on); }
   function playMusic() { audio.play().then(function () { setPlaying(true); }).catch(function () { setPlaying(false); }); }

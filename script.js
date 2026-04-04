@@ -3,7 +3,7 @@
 (function () {
   var isTouch = window.matchMedia('(hover:none)').matches;
 
-  /* Particle system */
+  /* Graphics Context: Particle Renderer */
   (function () {
     var canvas = document.getElementById('particles');
     if (!canvas) return;
@@ -19,7 +19,7 @@
     window.addEventListener('resize', resize, { passive: true });
 
     var COUNT = isTouch ? 40 : 80;
-    var COLORS = ['rgba(139,92,246,.5)', 'rgba(163,230,53,.4)', 'rgba(34,211,238,.4)', 'rgba(244,114,182,.35)'];
+    var COLORS = ['rgba(249,115,22,.5)', 'rgba(163,230,53,.4)', 'rgba(34,211,238,.4)', 'rgba(250,204,21,.35)'];
 
     for (var i = 0; i < COUNT; i++) {
       dots.push({
@@ -69,7 +69,7 @@
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = 'rgba(139,92,246,' + (0.12 * (1 - d / 120)) + ')';
+            ctx.strokeStyle = 'rgba(249,115,22,' + (0.12 * (1 - d / 120)) + ')';
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -80,7 +80,7 @@
     draw();
   })();
 
-  /* Custom cursor */
+  /* Custom Cursor DOM Controller */
   if (!isTouch) {
     var cur = document.querySelector('.cursor');
     var trail = document.querySelector('.cursor-trail');
@@ -108,7 +108,7 @@
       el.addEventListener('mouseleave', function () { cur.classList.remove('big'); trail.classList.remove('big'); });
     });
 
-    var TRAIL_COLORS = ['#a78bfa', '#a3e635', '#22d3ee', '#f472b6'];
+    var TRAIL_COLORS = ['#fb923c', '#a3e635', '#22d3ee', '#facc15'];
     var lastDot = 0;
 
     function spawnTrailDot(x, y) {
@@ -145,7 +145,7 @@
       setTimeout(function () { el.remove(); }, (dur + delay / 1000 + 0.1) * 1000);
     }
 
-    /* Magnetic buttons */
+    /* Positional Button Matrix Interactivity */
     document.querySelectorAll('.btn-v, .btn-o').forEach(function (btn) {
       btn.addEventListener('mousemove', function (e) {
         var r = btn.getBoundingClientRect();
@@ -156,7 +156,7 @@
       btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
     });
 
-    /* Glow orb */
+    /* Cursor Proximity Tracking Module */
     var orb = document.createElement('div');
     orb.className = 'glow-orb';
     document.body.appendChild(orb);
@@ -167,16 +167,16 @@
     }, { passive: true });
   }
 
-  /* Prevent right-click */
+  /* DOM Context Menu Override */
   document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 
-  /* Nav scroll state */
+  /* Header Scroll Intersection State */
   var nav = document.getElementById('nav');
   window.addEventListener('scroll', function () {
     nav.classList.toggle('stuck', scrollY > 50);
   }, { passive: true });
 
-  /* Mobile menu */
+  /* Viewport-Dependent Header State */
   var burger = document.getElementById('hamburger');
   var mmenu = document.getElementById('mmenu');
 
@@ -199,7 +199,7 @@
     if (e.key === 'Escape' && mmenu.classList.contains('open')) closeMenu();
   });
 
-  /* Smooth scroll */
+  /* Internal Anchor Coordinate Routing */
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var target = document.querySelector(a.getAttribute('href'));
@@ -207,7 +207,7 @@
     });
   });
 
-  /* Active nav highlight */
+  /* Scroll Progress Intersection Observer */
   var navAs = document.querySelectorAll('.nav-links a, #mmenu a');
   function updateNav() {
     var current = '';
@@ -219,7 +219,7 @@
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
 
-  /* Experience accordion */
+  /* Content Accordion Display Logic */
   document.querySelectorAll('.exp-hdr').forEach(function (hdr) {
     hdr.addEventListener('click', function () {
       var card = hdr.closest('.exp-card');
@@ -231,7 +231,7 @@
   var firstCard = document.querySelector('.exp-card');
   if (firstCard) firstCard.classList.add('open');
 
-  /* Stat counters */
+  /* DOM Counter Iteration Routine */
   function countUp(el, target, dur) {
     dur = dur || 1200;
     var suffix = el.dataset.suffix || '';
@@ -255,7 +255,7 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-target]').forEach(function (el) { counterObserver.observe(el); });
 
-  /* Scroll reveal */
+  /* Lazy Loading Element Observer */
   var revealObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -266,7 +266,7 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
 
-  /* Staggered project feature reveal */
+  /* Staggered Array Animation Renderer */
   var featureObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -279,7 +279,7 @@
   }, { threshold: 0.2 });
   document.querySelectorAll('.proj-card').forEach(function (card) { featureObserver.observe(card); });
 
-  /* 3D tilt on cards */
+  /* 3D Matrix Perspective Adjustments */
   if (!isTouch) {
     document.querySelectorAll('.proj-card, .skill-card').forEach(function (card) {
       card.addEventListener('mousemove', function (e) {
@@ -292,7 +292,7 @@
     });
   }
 
-  /* Text scramble on section headings */
+  /* Text Nodes Decryption Cipher Routine */
   var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*01234';
   var headingObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -327,7 +327,7 @@
   }, { threshold: 0.3 });
   document.querySelectorAll('.sec-h').forEach(function (h) { headingObserver.observe(h); });
 
-  /* Typewriter on hero subtitle */
+  /* Typewriter String Concatenation Sequence */
   (function () {
     var heroSub = document.querySelector('.hero-sub');
     if (!heroSub) return;
@@ -351,7 +351,7 @@
     setTimeout(type, 800);
   })();
 
-  /* Scroll-linked floats */
+  /* Global Floating Object Constraints */
   var backToTop = document.getElementById('back-to-top');
   var footer = document.querySelector('footer');
   var musicPanel = document.getElementById('music-player');
@@ -367,7 +367,7 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* Music player */
+  /* Base Audio Object Context Handler */
   var audio = document.getElementById('bg-music');
   var musicBtn = document.getElementById('music-btn');
   audio.volume = 0.05;
@@ -389,7 +389,7 @@
     window.addEventListener(evt, onFirstInteraction, { once: false, passive: true });
   });
 
-  // Maze game — recursive backtracking, smooth animation
+  // Module: Neural Labyrinth Generation Algorithm (Recursive Backtracking)
   var mazeCanvas = document.getElementById('maze-canvas');
   var mazeCtx = mazeCanvas ? mazeCanvas.getContext('2d') : null;
   var moveCountEl = document.getElementById('move-count');
@@ -454,11 +454,11 @@
     ctx.clearRect(0, 0, W, H);
 
     // Dark background
-    ctx.fillStyle = '#080614';
+    ctx.fillStyle = '#09090b';
     ctx.fillRect(0, 0, W, H);
 
     // Subtle grid dots
-    ctx.fillStyle = 'rgba(139,92,246,.06)';
+    ctx.fillStyle = 'rgba(249,115,22,.06)';
     for (var r = 0; r <= ROWS; r++) {
       for (var c = 0; c <= COLS; c++) {
         ctx.beginPath();
@@ -467,26 +467,26 @@
       }
     }
 
-    // Visited cells trail
+    // Map Coordinate Tracker History Output
     for (var key in visited) {
       var parts = key.split(',');
       var vc = parseInt(parts[0]), vr = parseInt(parts[1]);
-      ctx.fillStyle = 'rgba(139,92,246,.06)';
+      ctx.fillStyle = 'rgba(249,115,22,.06)';
       ctx.fillRect(vc * CELL + 2, vr * CELL + 2, CELL - 4, CELL - 4);
     }
 
-    // Radial light around player
+    // Complex Path Fill: Light Radial Shadow
     var px = player.renderX * CELL + CELL / 2;
     var py = player.renderY * CELL + CELL / 2;
     var lightRadius = CELL * 3.5;
     var grad = ctx.createRadialGradient(px, py, 0, px, py, lightRadius);
-    grad.addColorStop(0, 'rgba(139,92,246,.12)');
-    grad.addColorStop(0.5, 'rgba(139,92,246,.04)');
+    grad.addColorStop(0, 'rgba(249,115,22,.12)');
+    grad.addColorStop(0.5, 'rgba(249,115,22,.04)');
     grad.addColorStop(1, 'transparent');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
 
-    // Walls
+    // Node Boundary Traversal Rendering Loop
     ctx.lineCap = 'round';
     ctx.lineWidth = 2.5;
     for (var r = 0; r < ROWS; r++) {
@@ -496,7 +496,7 @@
         // Walls closer to player are brighter
         var d = Math.sqrt(Math.pow(c - player.renderX, 2) + Math.pow(r - player.renderY, 2));
         var brightness = Math.max(0.15, Math.min(0.7, 1 - d / 8));
-        ctx.strokeStyle = 'rgba(139,92,246,' + brightness + ')';
+        ctx.strokeStyle = 'rgba(249,115,22,' + brightness + ')';
 
         if (cell.top)    { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + CELL, y); ctx.stroke(); }
         if (cell.right)  { ctx.beginPath(); ctx.moveTo(x + CELL, y); ctx.lineTo(x + CELL, y + CELL); ctx.stroke(); }
@@ -505,7 +505,7 @@
       }
     }
 
-    // Exit portal — animated pulsing ring
+    // Graphical Element: End-state Objective Rendering
     var ex = (COLS - 1) * CELL + CELL / 2, ey = (ROWS - 1) * CELL + CELL / 2;
     var pulse = Math.sin(gameTime * 0.004) * 0.15 + 0.85;
     // Outer glow
@@ -537,7 +537,7 @@
       ctx.fill();
     }
 
-    // Player character — animated star with face
+    // Graphical Element: Player Positional Rendering
     var bounce = Math.sin(gameTime * 0.006) * 2;
     var squish = animating ? 0.85 : 1;
     var squishY = animating ? 1.15 : 1;
@@ -553,10 +553,10 @@
     var glowPulse = Math.sin(gameTime * 0.005) * 0.08 + 0.2;
     ctx.beginPath();
     ctx.arc(px, py + bounce, bodyR * 1.4, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(167,139,250,' + glowPulse + ')';
+    ctx.fillStyle = 'rgba(251,146,60,' + glowPulse + ')';
     ctx.fill();
 
-    // Body (Star Shape)
+    // Shape Matrix Rotation Transformation Logic
     ctx.save();
     ctx.translate(px, py + bounce);
     ctx.scale(squish, squishY);
@@ -579,18 +579,18 @@
       ctx.closePath();
     }
 
-    // Main star gradient
+    // Graphics Gradient: Core Entity Color Pallete
     var starGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, bodyR);
-    starGrad.addColorStop(0, '#ddd6fe');
-    starGrad.addColorStop(0.4, '#a78bfa');
-    starGrad.addColorStop(1, '#7c3aed');
+    starGrad.addColorStop(0, '#ffedd5');
+    starGrad.addColorStop(0.4, '#fb923c');
+    starGrad.addColorStop(1, '#ea580c');
     
-    // Sharper star: innerRadius is 0.4 of outerRadius
+    // Constraints Parameters: Outer against Inner Radii Bounds
     drawStarPath(0, 0, 5, bodyR, bodyR * 0.4);
     ctx.fillStyle = starGrad;
     ctx.fill();
 
-    // Subtle edge highlight
+    // Vector Rendering: Path Stroke Outer Edges
     ctx.strokeStyle = 'rgba(255,255,255,0.3)';
     ctx.lineWidth = 1;
     ctx.stroke();
@@ -604,31 +604,31 @@
 
     var eyeSpacing = bodyR * 0.25;
     // Eyes
-    ctx.fillStyle = '#1e1a38';
+    ctx.fillStyle = '#3f3f46';
     ctx.beginPath(); ctx.arc(-eyeSpacing + eyeOffX, -bodyR * 0.05 + eyeOffY, bodyR * 0.1, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.arc(eyeSpacing + eyeOffX, -bodyR * 0.05 + eyeOffY, bodyR * 0.1, 0, Math.PI * 2); ctx.fill();
     
-    // Tiny white shine
+    // Secondary Rendering: Eye Focal Shine
     ctx.fillStyle = '#fff';
     ctx.beginPath(); ctx.arc(-eyeSpacing + eyeOffX - 1, -bodyR * 0.07 + eyeOffY, bodyR * 0.04, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.arc(eyeSpacing + eyeOffX - 1, -bodyR * 0.07 + eyeOffY, bodyR * 0.04, 0, Math.PI * 2); ctx.fill();
 
-    // Smile
+    // Vector Subroutine: Facial Expression Render
     ctx.beginPath();
     ctx.arc(0 + eyeOffX * 0.5, bodyR * 0.1 + eyeOffY * 0.5, bodyR * 0.15, 0.1 * Math.PI, 0.9 * Math.PI, false);
-    ctx.strokeStyle = '#1e1a38';
+    ctx.strokeStyle = '#3f3f46';
     ctx.lineWidth = 1.2;
     ctx.stroke();
 
     ctx.restore();
 
-    // Keep the render loop going for animations
+    // Primary Request Animation Frame Initialization
     if (gameActive) {
       animFrame = requestAnimationFrame(drawMaze);
     }
   }
 
-  // Smooth lerp movement
+  // Linear Interpolation Movement Calculations
   function lerpTo(targetX, targetY, dir) {
     if (animating) return;
     animating = true;
@@ -725,7 +725,7 @@
     fireConfetti();
   }
 
-  // Lightweight confetti with auto-cleanup
+  // Memory-Efficient Global Confetti Particle Emitter
   function fireConfetti() {
     var cc = document.getElementById('confetti-canvas');
     if (!cc) return;
@@ -733,7 +733,7 @@
     cc.width = window.innerWidth;
     cc.height = window.innerHeight;
     var particles = [];
-    var colors = ['#8b5cf6', '#a3e635', '#22d3ee', '#f472b6', '#fb923c', '#bef264'];
+    var colors = ['#f97316', '#a3e635', '#22d3ee', '#facc15', '#fb923c', '#bef264'];
     var running = true;
 
     for (var i = 0; i < 50; i++) {
@@ -799,19 +799,19 @@
       newGame();
     });
 
-    // Keyboard
+    // Listeners: Keyboard Navigation Inputs
     document.addEventListener('keydown', function (e) {
       if (document.getElementById('terminal-overlay').classList.contains('show')) return;
       var dirMap = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right', w: 'up', a: 'left', s: 'down', d: 'right', W: 'up', A: 'left', S: 'down', D: 'right' };
       if (dirMap[e.key]) { e.preventDefault(); movePlayer(dirMap[e.key]); }
     });
 
-    // D-pad
+    // Listeners: D-Pad Vector Navigation
     document.querySelectorAll('.dpad-btn').forEach(function (btn) {
       btn.addEventListener('click', function () { movePlayer(btn.dataset.dir); });
     });
 
-    // Swipe
+    // Listeners: Mobile Canvas Touch Gestures
     var sx = 0, sy = 0;
     mazeCanvas.addEventListener('touchstart', function (e) {
       sx = e.touches[0].clientX; sy = e.touches[0].clientY;
@@ -825,9 +825,9 @@
     }, { passive: true });
   }
 
-  // ═══════════════════════════════════════════════════════
-  // INTERACTIVE TERMINAL
-  // ═══════════════════════════════════════════════════════
+  /* --------------------------------------------------------------------- */
+  /* Terminal Interface Core Functionality */
+  /* ================================================================= */
 
   var termOverlay = document.getElementById('terminal-overlay');
   var termInput = document.getElementById('terminal-input');
@@ -845,7 +845,7 @@
     }
   }
 
-  // Open with backtick
+  // Keybinding Event Listener: Terminal Core Engagement
   document.addEventListener('keydown', function (e) {
     if (e.key === '`' && !e.ctrlKey && !e.altKey) {
       e.preventDefault();
@@ -853,18 +853,18 @@
     }
   });
 
-  // Close button
+  // Document DOM Listener: Disengage Terminal Instance
   var termClose = document.getElementById('terminal-close');
   if (termClose) termClose.addEventListener('click', function () { toggleTerminal(false); });
 
-  // Click outside to close
+  // Pointer Event: External Bound Disengagement
   if (termOverlay) {
     termOverlay.addEventListener('click', function (e) {
       if (e.target === termOverlay) toggleTerminal(false);
     });
   }
 
-  // Draggable terminal window
+  // Coordinate Engine: Flexible Context DOM Repositioning
   (function () {
     var termBar = document.getElementById('terminal-bar');
     var termWin = document.getElementById('terminal-window');
@@ -890,7 +890,7 @@
     document.addEventListener('mouseup', function () { dragging = false; });
   })();
 
-  // Terminal commands
+  // Command Repository: Terminal Execution Tree
   var COMMANDS = {
     help: function () {
       return [
@@ -989,7 +989,7 @@
       termInput.value = '';
       if (!cmd) return;
 
-      // Echo the command
+      // Prompt Engine: DOM Document Insertion
       var echo = document.createElement('div');
       echo.className = 'term-prompt-echo';
       echo.textContent = 'jeof@portfolio:~$ ' + cmd;
@@ -1023,9 +1023,9 @@
     });
   }
 
-  // ═══════════════════════════════════════════════════════
-  // KONAMI CODE EASTER EGG
-  // ═══════════════════════════════════════════════════════
+  /* ================================================================= */
+  /* Key Sequence Observer Protocol */
+  /* ================================================================= */
 
   var konamiSeq = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
   var konamiIdx = 0;

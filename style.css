@@ -342,7 +342,8 @@ nav.stuck {
 }
 .htag:nth-child(1){animation-delay:0s;} .htag:nth-child(2){animation-delay:-1.1s;}
 .htag:nth-child(3){animation-delay:-2.3s;} .htag:nth-child(4){animation-delay:-.6s;}
-.htag:nth-child(5){animation-delay:-1.8s;}
+.htag:nth-child(5){animation-delay:-1.8s;} .htag:nth-child(6){animation-delay:-2.9s;}
+.htag:nth-child(7){animation-delay:-1.4s;}
 @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
 .cp{color:var(--v2);} .cl{color:var(--l2);} .cc{color:var(--cyan);} .ck{color:var(--pink);}
 
@@ -604,6 +605,7 @@ section { position: relative; z-index: 2; padding: 100px 60px; }
 .pcg3 { background: radial-gradient(circle, rgba(139,92,246,.25), transparent 70%); }
 .pcg4 { background: radial-gradient(circle, rgba(250,204,21,.20), transparent 70%); }
 .pcg5 { background: radial-gradient(circle, rgba(244,114,182,.20), transparent 70%); }
+.pcg6 { background: radial-gradient(circle, rgba(34,211,238,.20), transparent 70%); }
 .picon-cyan { border-color: rgba(34,211,238,.2); }
 .proj-card:hover { border-color: rgba(249,115,22,.4); box-shadow: 0 28px 70px rgba(0,0,0,.4); }
 .picon {

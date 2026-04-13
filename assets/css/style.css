@@ -6,10 +6,10 @@ html { scroll-behavior: smooth; }
 
 /* CSS Variables */
 :root {
-  --bg:   #18181b;
-  --bg2:  #27272a;
-  --surf: #3f3f46;
-  --s2:   #52525b;
+  --bg:   #09090b;
+  --bg2:  #18181b;
+  --surf: #27272a;
+  --s2:   #3f3f46;
   --bdr:  rgba(249,115,22,.2);
   --bdr2: rgba(249,115,22,.45);
   --v:    #f97316;
